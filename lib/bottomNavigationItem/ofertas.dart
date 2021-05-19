@@ -57,7 +57,7 @@ class _Ofertas extends State<Ofertas> {
                           child: Text(
                             'Modelo 1',
                             style: TextStyle(
-                                color: subtitulo,
+                                color: colorSubtitulos1,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -89,7 +89,7 @@ class _Ofertas extends State<Ofertas> {
                         child: Text(
                           'Modelo 1',
                           style: TextStyle(
-                              color: subtitulo,
+                              color: colorSubtitulos1,
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
                         ),
@@ -119,7 +119,7 @@ class _Ofertas extends State<Ofertas> {
                         child: Text(
                           'Modelo 1',
                           style: TextStyle(
-                              color: subtitulo,
+                              color: colorSubtitulos1,
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
                         ),
@@ -149,7 +149,7 @@ class _Ofertas extends State<Ofertas> {
                         child: Text(
                           'Modelo 1',
                           style: TextStyle(
-                              color: subtitulo,
+                              color: colorSubtitulos1,
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
                         ),
@@ -179,7 +179,7 @@ class _Ofertas extends State<Ofertas> {
                         child: Text(
                           'Modelo 1',
                           style: TextStyle(
-                              color: subtitulo,
+                              color: colorSubtitulos1,
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
                         ),
@@ -209,7 +209,7 @@ class _Ofertas extends State<Ofertas> {
                         child: Text(
                           'Modelo 1',
                           style: TextStyle(
-                              color: subtitulo,
+                              color: colorSubtitulos1,
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
                         ),
@@ -239,7 +239,7 @@ class _Ofertas extends State<Ofertas> {
                         child: Text(
                           'Modelo 1',
                           style: TextStyle(
-                              color: subtitulo,
+                              color: colorSubtitulos1,
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
                         ),

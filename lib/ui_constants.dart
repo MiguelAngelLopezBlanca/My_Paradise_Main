@@ -1,20 +1,12 @@
 import 'dart:ui';
 
-const colorTitle = Color(0xFF1C2340);
-const subtitulo = Color(0xFFF2D79D);
-const boton = Color(0xFFF7C66C);
-const gris = Color(0xFF707070);
-const griscalle = Color(0xFF9B9B9B);
-const fondobuscador = Color(0xFF2C2C2C);
-const textobuscador = Color(0xFFA6A6A9);
-const dorado = Color(0xFFF6BA00);
-const colorBienvenida = Color(0xFF003862);
 const colorCampos = Color(0xFF00F3F3F3);
 
 const colorPrincipal = Color(0xFF00B8C7);
 const colorBotones = Color(0xFFF9C4632);
 const colorSubtitulos1 = Color(0xFFD57A58);
 const colorSubtitulos2 = Color(0xFF152945);
+const fondoTextField = Color(0xFFF3F3F3); // Blanco Hueso
 
 // v1.0.9+4
 const double masterPercentGenericIconsWidth =

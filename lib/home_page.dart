@@ -213,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          color: gris,
+                          color: Colors.grey,
                           fontSize: 17),
                     ),
                     Material(
