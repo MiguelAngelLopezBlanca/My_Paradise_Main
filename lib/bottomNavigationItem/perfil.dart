@@ -17,113 +17,73 @@ class _PerfilState extends State<Perfil> {
     );
   }
 
+  double returnResponsiveWidth(context, double originalPercentValue) {
+    return MediaQuery.of(context).size.width * originalPercentValue;
+  }
+
+  double returnResponsiveHeight(context, double originalPercentValue) {
+    return MediaQuery.of(context).size.height * originalPercentValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: colorSubtitulos2,
       body: Stack(
+        fit: StackFit.expand,
         children: [
-          SafeArea(
-              child: FractionallySizedBox(
-            widthFactor: 1,
-            child: Column(
-              children: [
-                InkWell(
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 1.1),
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
+          Column(
+            children: [
+              Container(
+                width: 220,
+                height: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(100),
+                    bottomRight: Radius.circular(100),
                   ),
-                  onTap: () => handleNavigateTapToEditarPerfil(context),
+                  color: Colors.green,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: Column(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 45),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                          height: 120,
-                          width: 120,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(70),
-                            color: Colors.black,
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  "assets/images/iconos/profile.png"),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Column(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 10),
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
+                        Column(
+                          children: [
+                            Padding(padding: EdgeInsets.only(top: 70)),
+                            Text(
                               'Nombre y Apellidos',
                               style: TextStyle(
-                                fontSize: 20,
                                 color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 10),
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
+                            Padding(padding: EdgeInsets.only(top: 30)),
+                            Text(
                               'email@example.com',
                               style: TextStyle(
-                                fontSize: 20,
                                 color: Colors.white,
+                                fontSize: 18,
                               ),
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 10),
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: Text(
-                              'Telefono',
+                            Padding(padding: EdgeInsets.only(top: 30)),
+                            Text(
+                              '123456789',
                               style: TextStyle(
-                                fontSize: 20,
                                 color: Colors.white,
+                                fontSize: 16,
                               ),
                             ),
-                          ),
+                            Container(),
+                          ],
                         ),
                       ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          )),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 300, 0, 0),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(200),
-                ),
-                color: Colors.white),
+              ),
+            ],
           ),
         ],
       ),

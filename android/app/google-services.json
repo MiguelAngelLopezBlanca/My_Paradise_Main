@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "517122413339",
+    "project_id": "myparadise-5a792",
+    "storage_bucket": "myparadise-5a792.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517122413339:android:13272dbdddeb0018cb39be",
+        "android_client_info": {
+          "package_name": "com.example.my_paradise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517122413339-kph9cj59ekr5vo64qg36iikhgvcfgpm6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeGR5XJHuMmwQWR1ilyoqcqd1NcbJdL_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517122413339-kph9cj59ekr5vo64qg36iikhgvcfgpm6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "517122413339-vf1sv8q5n8nsvdujmfs1f24d3m33errf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myParadise"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

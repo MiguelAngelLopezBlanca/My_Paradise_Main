@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_paradise/ui_constants.dart';
 
 class EditarPerfil extends StatefulWidget {
@@ -6,6 +9,30 @@ class EditarPerfil extends StatefulWidget {
 }
 
 class _EditarPerfil extends State<EditarPerfil> {
+  File imageFile;
+
+  void abrirGaleria(BuildContext context) async {
+    var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    this.setState(() {
+      imageFile = picture;
+    });
+  }
+
+  Widget verImagen() {
+    if (imageFile != null) {
+      return Image.file(imageFile,
+          width: returnResponsiveWidth(context, 0.3),
+          height: returnResponsiveHeight(context, 0.3));
+    } else {
+      return Text(
+        "Por favor seleccione una imagen",
+        textAlign: TextAlign.center,
+        style: TextStyle(color: Colors.white),
+      );
+    }
+  }
+
   double returnResponsiveWidth(context, double originalPercentValue) {
     return MediaQuery.of(context).size.width * originalPercentValue;
   }
@@ -23,6 +50,7 @@ class _EditarPerfil extends State<EditarPerfil> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: colorSubtitulos2,
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -35,15 +63,44 @@ class _EditarPerfil extends State<EditarPerfil> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
-                    color: Colors.black,
+                    color: Colors.white,
                     fontSize: returnResponsiveFontSize(context, 30)),
               ),
-              Image.asset(
-                'assets/contenedor_imagen.png',
-                height: returnResponsiveHeight(context, 0.35),
+              FractionallySizedBox(
+                widthFactor: 0.75,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    OutlinedButton(
+                      onPressed: () => abrirGaleria(context),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.all(10.0),
+                        backgroundColor: colorSubtitulos1,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
+                      ),
+                      child: const Text(
+                        "Subir imagen",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    verImagen(),
+                  ],
+                ),
               ),
               const SizedBox(
-                height: 10,
+                height: 50,
               ),
               FractionallySizedBox(
                 widthFactor: 0.75,
