@@ -35,7 +35,7 @@ class _PerfilState extends State<Perfil> {
             children: [
               Container(
                 width: 220,
-                height: 350,
+                height: 420,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(100),
@@ -75,7 +75,24 @@ class _PerfilState extends State<Perfil> {
                                 fontSize: 16,
                               ),
                             ),
-                            Container(),
+                            Padding(padding: EdgeInsets.only(top: 30)),
+                            Container(
+                              width: 180,
+                              height: 180,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                border: Border.all(
+                                  width: 10,
+                                  color: Colors.white,
+                                ),
+                                color: Colors.white,
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      'assets/images/iconos/profile.png'),
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -83,6 +100,131 @@ class _PerfilState extends State<Perfil> {
                   ],
                 ),
               ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 3.8,
+                child: ListView(
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          height: returnResponsiveWidth(context, 0.15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/house.jpg"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Center(
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              color: Colors.black.withAlpha(120),
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Modelo 1',
+                                style: TextStyle(
+                                    color: colorSubtitulos1,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          height: returnResponsiveWidth(context, 0.15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/house.jpg"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Center(
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              color: Colors.black.withAlpha(120),
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Modelo 1',
+                                style: TextStyle(
+                                    color: colorSubtitulos1,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          height: returnResponsiveWidth(context, 0.15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/house.jpg"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Center(
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              color: Colors.black.withAlpha(120),
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Modelo 1',
+                                style: TextStyle(
+                                    color: colorSubtitulos1,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          height: returnResponsiveWidth(context, 0.15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/house.jpg"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Center(
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              color: Colors.black.withAlpha(120),
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Modelo 1',
+                                style: TextStyle(
+                                    color: colorSubtitulos1,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ],
