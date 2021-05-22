@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_paradise/ui_constants.dart';
@@ -10,6 +11,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    getUsers();
+  }
+
+  void getUsers() async {
+    CollectionReference collectionReference =
+        FirebaseFirestore.instance.collection("usuarios");
+
+    QuerySnapshot users = await collectionReference.get();
+
+    if (users.docs.length != 0) {
+      for (var doc in users.docs) {
+        print(doc.data());
+      }
+    }
+  }
+
   final userTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final kHintTextStyle = TextStyle(
