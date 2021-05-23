@@ -50,8 +50,8 @@ class _EditarPerfil extends State<EditarPerfil> {
   }
 
   void updateData() {
-    auth.currentUser.updateProfile(
-        displayName: dsName, photoURL: 'assets/images/iconos/mas.png');
+    auth.currentUser
+        .updateProfile(displayName: dsName, photoURL: imageFile.path);
   }
 
   @override

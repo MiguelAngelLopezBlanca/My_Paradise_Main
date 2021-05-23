@@ -200,8 +200,7 @@ class _PerfilState extends State<Perfil> {
                                 ),
                                 color: Colors.white,
                                 image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/iconos/profile.png'),
+                                  image: AssetImage(auth.currentUser.photoURL),
                                   fit: BoxFit.contain,
                                 ),
                               ),
