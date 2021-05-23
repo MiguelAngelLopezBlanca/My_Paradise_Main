@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_paradise/ui_constants.dart';
@@ -10,6 +11,8 @@ class EditarPerfil extends StatefulWidget {
 
 class _EditarPerfil extends State<EditarPerfil> {
   File imageFile;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String dsName, mail, passwd, passwdV;
 
   void abrirGaleria(BuildContext context) async {
     var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -44,6 +47,11 @@ class _EditarPerfil extends State<EditarPerfil> {
   double returnResponsiveFontSize(context, double originalValue) {
     return (MediaQuery.of(context).size.width * originalValue) /
         masterScreenWidth;
+  }
+
+  void updateData() {
+    auth.currentUser.updateProfile(
+        displayName: dsName, photoURL: 'assets/images/iconos/mas.png');
   }
 
   @override
@@ -125,6 +133,9 @@ class _EditarPerfil extends State<EditarPerfil> {
                           ),
                         ),
                       ),
+                      onChanged: (value) {
+                        dsName = value;
+                      },
                     ),
                     const SizedBox(
                       height: 20,
@@ -197,7 +208,7 @@ class _EditarPerfil extends State<EditarPerfil> {
                     ),
                     Padding(padding: const EdgeInsets.fromLTRB(0, 0, 0, 0)),
                     OutlinedButton(
-                      onPressed: () => null,
+                      onPressed: () => updateData(),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.all(10.0),
                         backgroundColor: colorSubtitulos1,
