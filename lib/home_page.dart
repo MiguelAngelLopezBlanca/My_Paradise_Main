@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_paradise/bottomNavigationItem/registro.dart';
 import 'package:my_paradise/ui_constants.dart';
 
 import 'bottomNavigation/menu.dart';
@@ -45,6 +46,22 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).push(
       CupertinoPageRoute(
         builder: (_) => Menu(),
+      ),
+    );
+  }
+
+  void handleNavigateTapToIniciarSesion(BuildContext context) {
+    Navigator.of(context).push(
+      CupertinoPageRoute(
+        builder: (_) => Menu(),
+      ),
+    );
+  }
+
+  void handleNavigateTapToRegistro(BuildContext context) {
+    Navigator.of(context).push(
+      CupertinoPageRoute(
+        builder: (_) => Registro(),
       ),
     );
   }
@@ -175,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                         final user = await auth.signInWithEmailAndPassword(
                             email: email, password: passwd);
                         if (user != null) {
-                          print("OK");
+                          handleNavigateTapToIniciarSesion(context);
                         }
                       } catch (e) {
                         print("ERROR: " + e.message);
@@ -259,7 +276,8 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.transparent,
                       child: GestureDetector(
                         // v2.1.22+7
-                        onTap: () => null, //Registrarse
+                        onTap: () =>
+                            handleNavigateTapToRegistro(context), //Registrarse
                         child: Text(
                           'Registrate',
                           textAlign: TextAlign.end,
