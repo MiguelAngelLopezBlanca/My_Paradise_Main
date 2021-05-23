@@ -78,38 +78,6 @@ class _Registro extends State<Registro> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Por favor, inserte un nombre válido"),
         ));
-      } else {
-        if (!isEmail(email) || email.isEmpty || email == null) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("El email no es válido"),
-          ));
-        } else {
-          if (passwd != passwdV || passwd.isEmpty || passwd == null) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text("Las contraseñas deben coincidir"),
-            ));
-          } else {
-            UserCredential result = await _auth.createUserWithEmailAndPassword(
-                email: email, password: password);
-            User user = result.user;
-            user.updateProfile(displayName: name); //added this line
-
-          }
-        }
-      }
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
-
-  Future registerWithEmailAndPassword2(
-      String name, String password, String email) async {
-    try {
-      if (name == null || name.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Por favor, inserte un nombre válido"),
-        ));
       } else if (email == null || !isEmail(email)) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("El email no es válido"),
@@ -280,7 +248,7 @@ class _Registro extends State<Registro> {
                     Padding(padding: const EdgeInsets.fromLTRB(0, 0, 0, 0)),
                     OutlinedButton(
                       onPressed: () =>
-                          {registerWithEmailAndPassword2(dsName, passwd, mail)},
+                          {registerWithEmailAndPassword(dsName, passwd, mail)},
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.all(10.0),
                         backgroundColor: colorBotones,
