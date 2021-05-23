@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_paradise/bottomNavigationItem/registro.dart';
 import 'package:my_paradise/ui_constants.dart';
 
 import 'bottomNavigation/menu.dart';
@@ -45,6 +46,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void handleNavigateTapToRegistro(BuildContext context) {
+    Navigator.of(context).push(
+      CupertinoPageRoute(
+        builder: (_) => Registro(),
+      ),
+    );
+  }
+
   double returnResponsiveFontSize(context, double originalValue) {
     return (MediaQuery.of(context).size.width * originalValue) /
         masterScreenWidth;
@@ -65,7 +74,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/fondo.png"),
+            image: AssetImage("assets/images/fondo_oscuro.jpg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -93,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          color: colorSubtitulos2,
+                          color: fourthColor,
                           fontSize: returnResponsiveFontSize(context, 20.0)),
                     ),
                     Image.asset(
@@ -233,14 +242,14 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          color: Colors.grey,
+                          color: colorTextos,
                           fontSize: 17),
                     ),
                     Material(
                       color: Colors.transparent,
                       child: GestureDetector(
-                        // v2.1.22+7
-                        onTap: () => null, //Registrarse
+                        onTap: () =>
+                            handleNavigateTapToRegistro(context), //Registrarse
                         child: Text(
                           'Registrate',
                           textAlign: TextAlign.end,
