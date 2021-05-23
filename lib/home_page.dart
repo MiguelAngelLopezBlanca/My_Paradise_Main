@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_paradise/bottomNavigationItem/registro.dart';
 import 'package:my_paradise/ui_constants.dart';
 
 import 'bottomNavigation/menu.dart';
@@ -12,6 +12,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String email, passwd;
+
   @override
   void initState() {
     super.initState();
@@ -46,14 +49,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void handleNavigateTapToRegistro(BuildContext context) {
-    Navigator.of(context).push(
-      CupertinoPageRoute(
-        builder: (_) => Registro(),
-      ),
-    );
-  }
-
   double returnResponsiveFontSize(context, double originalValue) {
     return (MediaQuery.of(context).size.width * originalValue) /
         masterScreenWidth;
@@ -74,7 +69,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/fondo_oscuro.jpg"),
+            image: AssetImage("assets/images/fondo.png"),
             fit: BoxFit.cover,
           ),
         ),
@@ -102,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          color: fourthColor,
+                          color: colorSubtitulos2,
                           fontSize: returnResponsiveFontSize(context, 20.0)),
                     ),
                     Image.asset(
@@ -114,27 +109,29 @@ class _HomePageState extends State<HomePage> {
                       height: 20,
                     ),
                     TextField(
-                      // v2.1.21+7
-                      keyboardType: TextInputType.emailAddress,
-                      controller: userTextController,
-                      style: TextStyle(
-                        height: 1,
-                        color: Colors.black,
-                        fontFamily: 'OpenSans',
-                      ),
-                      //
-                      decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        filled: true,
-                        border: new OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(15.0),
-                          ),
+                        // v2.1.21+7
+                        keyboardType: TextInputType.emailAddress,
+                        controller: userTextController,
+                        style: TextStyle(
+                          height: 1,
+                          color: Colors.black,
+                          fontFamily: 'OpenSans',
                         ),
-                        hintText: "Email", // v2.1.21+7
-                        hintStyle: kHintTextStyle, // v2.1.21+7
-                      ),
-                    ),
+                        //
+                        decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(15.0),
+                            ),
+                          ),
+                          hintText: "Email", // v2.1.21+7
+                          hintStyle: kHintTextStyle, // v2.1.21+7
+                        ),
+                        onChanged: (value) {
+                          email = value;
+                        }),
                     const SizedBox(
                       height: 20,
                     ),
@@ -154,8 +151,11 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         hintText: "Contraseña",
-                        hintStyle: kHintTextStyle, // v2.1.21+7
+                        hintStyle: kHintTextStyle, // v2.1.21+7,
                       ),
+                      onChanged: (value) {
+                        passwd = value;
+                      },
                     ),
                     const SizedBox(
                       height: 10,
@@ -170,7 +170,17 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   OutlinedButton(
-                    onPressed: () => null,
+                    onPressed: () async {
+                      try {
+                        final user = await auth.signInWithEmailAndPassword(
+                            email: email, password: passwd);
+                        if (user != null) {
+                          print("OK");
+                        }
+                      } catch (e) {
+                        print("ERROR: " + e.message);
+                      }
+                    },
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.all(10.0),
                       backgroundColor: colorBotones,
@@ -242,14 +252,14 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          color: colorTextos,
+                          color: Colors.grey,
                           fontSize: 17),
                     ),
                     Material(
                       color: Colors.transparent,
                       child: GestureDetector(
-                        onTap: () =>
-                            handleNavigateTapToRegistro(context), //Registrarse
+                        // v2.1.22+7
+                        onTap: () => null, //Registrarse
                         child: Text(
                           'Registrate',
                           textAlign: TextAlign.end,
