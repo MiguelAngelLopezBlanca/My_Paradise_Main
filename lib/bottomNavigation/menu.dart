@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_paradise/bottomNavigationItem/mas.dart';
 import 'package:my_paradise/bottomNavigationItem/ofertas.dart';
 import 'package:my_paradise/bottomNavigationItem/perfil.dart';
 
+import '../home_page.dart';
 import '../ui_constants.dart';
 
 class Menu extends StatefulWidget {
@@ -12,6 +14,7 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
+  FirebaseAuth auth = FirebaseAuth.instance;
   int _menuActual = 0;
 
   List<Widget> _paginas = [
@@ -19,6 +22,14 @@ class _MenuState extends State<Menu> {
     Mas(),
     Perfil(),
   ];
+
+  void handleNavigateTapToHomePage(BuildContext context) {
+    Navigator.of(context).push(
+      CupertinoPageRoute(
+        builder: (_) => HomePage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +63,16 @@ class _MenuState extends State<Menu> {
           iconSize: 25,
           onTap: (index) {
             setState(() {
-              _menuActual = index;
+              if (auth.currentUser != null) {
+                _menuActual = index;
+              } else {
+                if (index == 2) {
+                  print('No has iniciado sesion');
+                  handleNavigateTapToHomePage(context);
+                } else {
+                  _menuActual = index;
+                }
+              }
             });
           },
           elevation: 0),
