@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/fondo.png"),
+            image: AssetImage("assets/images/fondo_oscuro.jpg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          color: colorSubtitulos2,
+                          color: fourthColor,
                           fontSize: returnResponsiveFontSize(context, 20.0)),
                     ),
                     Image.asset(
@@ -252,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          color: Colors.grey,
+                          color: colorTextos,
                           fontSize: 17),
                     ),
                     Material(
