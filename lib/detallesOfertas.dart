@@ -43,7 +43,7 @@ class _DetallesOfertasState extends State<DetallesOfertas> {
                 onSceneCreated: (Scene scene) {
                   scene.camera.zoom = 10;
                   scene.world.add(
-                    Object(fileName: 'assets/modelos/modelo1/chalet.obj'),
+                    Object(fileName: 'assets/modelos/chalet.obj'),
                   );
                 },
               ),
