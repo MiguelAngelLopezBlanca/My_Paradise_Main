@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,8 +11,28 @@ class Mas extends StatefulWidget {
 }
 
 class _Mas extends State<Mas> {
+  FirebaseAuth auth = FirebaseAuth.instance;
   double returnResponsiveWidth(context, double originalPercentValue) {
     return MediaQuery.of(context).size.width * originalPercentValue;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getModels();
+  }
+
+  void getModels() async {
+    CollectionReference collectionReference =
+        FirebaseFirestore.instance.collection("modelos");
+
+    QuerySnapshot models = await collectionReference.get();
+
+    if (models.docs.length != 0) {
+      for (var doc in models.docs) {
+        print(doc.data());
+      }
+    }
   }
 
   @override
@@ -50,27 +72,6 @@ class _Mas extends State<Mas> {
                         fontWeight: FontWeight.w600),
                   ),
                 ),
-              ),
-            ),
-            Container(
-              width: 400,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.black,
-              ),
-            ),
-            Container(
-              width: 400,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.white,
-              ),
-            ),
-            Container(
-              width: 400,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.yellow,
               ),
             ),
           ],
