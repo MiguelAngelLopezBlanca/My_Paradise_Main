@@ -12,6 +12,9 @@ class Mas extends StatefulWidget {
 
 class _Mas extends State<Mas> {
   FirebaseAuth auth = FirebaseAuth.instance;
+
+  List<Modelo> _modelos = [];
+
   double returnResponsiveWidth(context, double originalPercentValue) {
     return MediaQuery.of(context).size.width * originalPercentValue;
   }
@@ -23,16 +26,20 @@ class _Mas extends State<Mas> {
   }
 
   void getModels() async {
-    CollectionReference collectionReference =
-        FirebaseFirestore.instance.collection("modelos");
-
-    QuerySnapshot models = await collectionReference.get();
-
-    if (models.docs.length != 0) {
-      for (var doc in models.docs) {
-        print(doc.data());
-      }
-    }
+    FirebaseFirestore.instance
+        .collection('modelos')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        String name = doc["nombre"];
+        String descripcion = doc["descripcion"];
+        String nombreArchivo = doc["nombreArchivo"];
+        String nombreImagen = doc["nombreImagen"];
+        Modelo modelo =
+            new Modelo(name, descripcion, nombreArchivo, nombreImagen);
+        _modelos.add(modelo);
+      });
+    });
   }
 
   @override
@@ -78,5 +85,20 @@ class _Mas extends State<Mas> {
         ),
       ),
     );
+  }
+}
+
+class Modelo {
+  String nombre;
+  String descripcion;
+  String nombreArchivo;
+  String nombreImagen;
+
+  Modelo(String name, String descripcion, String nombreArchivo,
+      String nombreImagen) {
+    this.nombre = name;
+    this.descripcion = descripcion;
+    this.nombreArchivo = nombreArchivo;
+    this.nombreImagen = nombreImagen;
   }
 }
