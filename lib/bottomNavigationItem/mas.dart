@@ -26,62 +26,63 @@ class _Mas extends State<Mas> {
   }
 
   void getModels() async {
-    FirebaseFirestore.instance
-        .collection('modelos')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        String name = doc["nombre"];
-        String descripcion = doc["descripcion"];
-        String nombreArchivo = doc["nombreArchivo"];
-        String nombreImagen = doc["nombreImagen"];
-        Modelo modelo =
-            new Modelo(name, descripcion, nombreArchivo, nombreImagen);
-        _modelos.add(modelo);
-      });
-    });
+    FirebaseFirestore.instance.collection('modelos').get().then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            String name = doc["nombre"];
+            String descripcion = doc["descripcion"];
+            String nombreArchivo = doc["nombreArchivo"];
+            String nombreImagen = doc["nombreImagen"];
+            Modelo modelo =
+                new Modelo(name, descripcion, nombreArchivo, nombreImagen);
+            _modelos.add(modelo);
+          },
+        );
+        print(_modelos.length);
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: ListView.builder(
-          itemCount: _modelos.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return Container(
-              width: returnResponsiveWidth(context, 0.95),
+      body: ListView.builder(
+        itemCount: _modelos.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: EdgeInsets.fromLTRB(10, 50, 10, 10),
+            width: returnResponsiveWidth(context, 0.95),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              image: DecorationImage(
+                image: AssetImage(
+                    "assets/images/modelos/" + _modelos[index].nombreImagen),
+                fit: BoxFit.cover,
+              ),
+            ),
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: 100,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                image: DecorationImage(
-                  image: AssetImage(
-                      "assets/images/modelos/" + _modelos[index].nombreImagen),
-                  fit: BoxFit.cover,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
                 ),
+                color: Colors.black.withAlpha(120),
               ),
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
-                  ),
-                  color: Colors.black.withAlpha(120),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  'Modelo 1',
-                  style: TextStyle(
-                      color: colorBotones,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
-                ),
+              alignment: Alignment.center,
+              child: Text(
+                _modelos[index].nombre,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
