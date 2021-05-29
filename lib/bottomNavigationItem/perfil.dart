@@ -225,7 +225,7 @@ class _PerfilState extends State<Perfil> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 3.5,
+                height: MediaQuery.of(context).size.height / 5,
                 child: PieChart(
                   PieChartData(
                       pieTouchData:
@@ -252,7 +252,7 @@ class _PerfilState extends State<Perfil> {
                 ),
               ),
               const SizedBox(
-                height: 18,
+                height: 33,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
