@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import '../detallesOfertas.dart';
 import '../ui_constants.dart';
 
-class Ofertas extends StatefulWidget {
+class ListadoOfertas extends StatefulWidget {
   @override
-  _Ofertas createState() => _Ofertas();
+  _ListadoOfertas createState() => _ListadoOfertas();
 }
 
-class _Ofertas extends State<Ofertas> {
+class _ListadoOfertas extends State<ListadoOfertas> {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   List<Oferta> _ofertas = [];
@@ -24,14 +24,6 @@ class _Ofertas extends State<Ofertas> {
 
   double returnResponsiveHeight(context, double originalPercentValue) {
     return MediaQuery.of(context).size.height * originalPercentValue;
-  }
-
-  void handleNavigateTapToDetallesOferta(BuildContext context) {
-    Navigator.of(context).push(
-      CupertinoPageRoute(
-        builder: (_) => DetallesOfertas(),
-      ),
-    );
   }
 
   @override
@@ -94,7 +86,14 @@ class _Ofertas extends State<Ofertas> {
                 ),
               ),
             ),
-            onTap: () => null,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetallesOfertas(_ofertas[index]),
+                ),
+              );
+            },
           );
         },
       ),
@@ -109,9 +108,9 @@ class Oferta {
   String nomConstructora;
   String precio;
 
-  Oferta(String name, String descripcion, String nombreArchivo,
+  Oferta(String nombre, String descripcion, String nombreArchivo,
       String nomConstructora, String precio) {
-    this.nombre = name;
+    this.nombre = nombre;
     this.descripcion = descripcion;
     this.nombreArchivo = nombreArchivo;
     this.nomConstructora = nomConstructora;

@@ -18,7 +18,7 @@ class _MenuState extends State<Menu> {
   int _menuActual = 0;
 
   List<Widget> _paginas = [
-    Ofertas(),
+    ListadoOfertas(),
     Mas(),
     Perfil(),
   ];

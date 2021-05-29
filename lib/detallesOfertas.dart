@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
+import 'package:my_paradise/bottomNavigationItem/ofertas.dart';
 
-class DetallesOfertas extends StatefulWidget {
-  @override
-  _DetallesOfertasState createState() => _DetallesOfertasState();
-}
+class DetallesOfertas extends StatelessWidget {
+  final Oferta ofertas;
 
-class _DetallesOfertasState extends State<DetallesOfertas> {
+  DetallesOfertas(this.ofertas);
+
   double returnResponsiveWidth(context, double originalPercentValue) {
     return MediaQuery.of(context).size.width * originalPercentValue;
   }
