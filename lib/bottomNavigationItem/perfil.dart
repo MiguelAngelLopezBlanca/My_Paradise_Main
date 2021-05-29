@@ -41,88 +41,6 @@ class _PerfilState extends State<Perfil> {
     return MediaQuery.of(context).size.height * originalPercentValue;
   }
 
-  List<PieChartSectionData> showingSections() {
-    return List.generate(4, (i) {
-      final isTouched = i == touchedIndex;
-      final fontSize = isTouched ? 20.0 : 16.0;
-      final radius = isTouched ? 110.0 : 100.0;
-      final widgetSize = isTouched ? 55.0 : 40.0;
-
-      switch (i) {
-        case 0:
-          return PieChartSectionData(
-            color: const Color(0xff0293ee),
-            value: 40,
-            title: '40%',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-            badgeWidget: _Badge(
-              'assets/images/iconos/aprobados.png',
-              size: widgetSize,
-              borderColor: const Color(0xff0293ee),
-            ),
-            badgePositionPercentageOffset: .98,
-          );
-        case 1:
-          return PieChartSectionData(
-            color: const Color(0xfff8b250),
-            value: 30,
-            title: '30%',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-            badgeWidget: _Badge(
-              'assets/images/iconos/proyecto.png',
-              size: widgetSize,
-              borderColor: const Color(0xfff8b250),
-            ),
-            badgePositionPercentageOffset: .98,
-          );
-        case 2:
-          return PieChartSectionData(
-            color: const Color(0xff845bef),
-            value: 16,
-            title: '16%',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-            badgeWidget: _Badge(
-              'assets/images/iconos/visitas.png',
-              size: widgetSize,
-              borderColor: const Color(0xff845bef),
-            ),
-            badgePositionPercentageOffset: .98,
-          );
-        case 3:
-          return PieChartSectionData(
-            color: const Color(0xff13d38e),
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-            badgeWidget: _Badge(
-              'assets/images/iconos/visitas.png',
-              size: widgetSize,
-              borderColor: const Color(0xff13d38e),
-            ),
-            badgePositionPercentageOffset: .98,
-          );
-        default:
-          throw 'Oh no';
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -213,65 +131,29 @@ class _PerfilState extends State<Perfil> {
                 ),
               ),
               const SizedBox(
-                height: 18,
-              ),
-              Text(
-                'Estadísticas Perfil',
-                style: TextStyle(
-                  color: colorTextos,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 5,
-                child: PieChart(
-                  PieChartData(
-                      pieTouchData:
-                          PieTouchData(touchCallback: (pieTouchResponse) {
-                        setState(() {
-                          final desiredTouch = pieTouchResponse.touchInput
-                                  is! PointerExitEvent &&
-                              pieTouchResponse.touchInput is! PointerUpEvent;
-                          if (desiredTouch &&
-                              pieTouchResponse.touchedSection != null) {
-                            touchedIndex = pieTouchResponse
-                                .touchedSection.touchedSectionIndex;
-                          } else {
-                            touchedIndex = -1;
-                          }
-                        });
-                      }),
-                      borderData: FlBorderData(
-                        show: false,
-                      ),
-                      sectionsSpace: 0,
-                      centerSpaceRadius: 0,
-                      sections: showingSections()),
-                ),
-              ),
-              const SizedBox(
-                height: 33,
+                height: 53,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
                     children: [
-                      Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.white),
-                        child: InkWell(
-                          child: Icon(
-                            Icons.list_sharp,
-                            size: 40,
+                      InkWell(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 2.5,
+                          height: MediaQuery.of(context).size.width / 2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.white,
+                            image: DecorationImage(
+                              image: AssetImage(
+                                'assets/images/lista_proyectos.jpg',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                          onTap: () => null,
                         ),
+                        onTap: () => null,
                       ),
                     ],
                   ),
@@ -280,19 +162,22 @@ class _PerfilState extends State<Perfil> {
                   ),
                   Column(
                     children: [
-                      Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.white),
-                        child: InkWell(
-                          child: Icon(
-                            Icons.edit,
-                            size: 40,
+                      InkWell(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 2.5,
+                          height: MediaQuery.of(context).size.width / 2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.white,
+                            image: DecorationImage(
+                              image: AssetImage(
+                                'assets/images/editar_perfil.png',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                          onTap: () => handleNavigateTapToEditarPerfil(context),
                         ),
+                        onTap: () => handleNavigateTapToEditarPerfil(context),
                       ),
                     ],
                   ),
@@ -301,50 +186,6 @@ class _PerfilState extends State<Perfil> {
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _Badge extends StatelessWidget {
-  final String svgAsset;
-  final double size;
-  final Color borderColor;
-
-  const _Badge(
-    this.svgAsset, {
-    Key key,
-    this.size,
-    this.borderColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: PieChart.defaultDuration,
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: borderColor,
-          width: 2,
-        ),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black.withOpacity(.5),
-            offset: const Offset(3, 3),
-            blurRadius: 3,
-          ),
-        ],
-      ),
-      padding: EdgeInsets.all(size * .15),
-      child: Center(
-        child: Image(
-          image: AssetImage(svgAsset),
-          fit: BoxFit.contain,
-        ),
       ),
     );
   }

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +12,10 @@ class Ofertas extends StatefulWidget {
 }
 
 class _Ofertas extends State<Ofertas> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  List<Oferta> _ofertas = [];
+
   String titulo = 'Ofertas';
 
   double returnResponsiveWidth(context, double originalPercentValue) {
@@ -29,232 +35,86 @@ class _Ofertas extends State<Ofertas> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    getOfertas();
+  }
+
+  void getOfertas() async {
+    FirebaseFirestore.instance.collection('ofertas').get().then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            String name = doc["nombre"];
+            String descripcion = doc["descripcion"];
+            String nombreArchivo = doc["nombreArchivo"];
+            String nomConstructora = doc["nomConstructora"];
+            String precio = doc["precio"];
+            Oferta oferta = new Oferta(
+                name, descripcion, nombreArchivo, nomConstructora, precio);
+            _ofertas.add(oferta);
+          },
+        );
+        print(_ofertas.length);
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              child: ListView(
-                children: [
-                  InkWell(
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      height: returnResponsiveWidth(context, 0.3),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/house.jpg"),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Center(
-                        child: Container(
-                          height: 50,
-                          width: 100,
-                          color: Colors.black.withAlpha(120),
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Modelo 1',
-                            style: TextStyle(
-                                color: colorSubtitulos1,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ),
-                    ),
-                    onTap: () => handleNavigateTapToDetallesOferta(context),
+      body: ListView.builder(
+        itemCount: _ofertas.length,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) {
+          return InkWell(
+            child: Container(
+              margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+              height: returnResponsiveWidth(context, 0.3),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                image: DecorationImage(
+                  image: AssetImage("assets/images/house.jpg"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Center(
+                child: Container(
+                  height: 50,
+                  width: 200,
+                  color: Colors.black.withAlpha(120),
+                  alignment: Alignment.center,
+                  child: Text(
+                    _ofertas[index].nombre,
+                    style: TextStyle(
+                        color: colorSubtitulos1,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 10)),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    height: returnResponsiveWidth(context, 0.3),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/house.jpg"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Center(
-                      child: Container(
-                        height: 50,
-                        width: 100,
-                        color: Colors.black.withAlpha(120),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Modelo 1',
-                          style: TextStyle(
-                              color: colorSubtitulos1,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 10)),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    height: returnResponsiveWidth(context, 0.3),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/house.jpg"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Center(
-                      child: Container(
-                        height: 50,
-                        width: 100,
-                        color: Colors.black.withAlpha(120),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Modelo 1',
-                          style: TextStyle(
-                              color: colorSubtitulos1,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 10)),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    height: returnResponsiveWidth(context, 0.3),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/house.jpg"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Center(
-                      child: Container(
-                        height: 50,
-                        width: 100,
-                        color: Colors.black.withAlpha(120),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Modelo 1',
-                          style: TextStyle(
-                              color: colorSubtitulos1,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 10)),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    height: returnResponsiveWidth(context, 0.3),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/house.jpg"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Center(
-                      child: Container(
-                        height: 50,
-                        width: 100,
-                        color: Colors.black.withAlpha(120),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Modelo 1',
-                          style: TextStyle(
-                              color: colorSubtitulos1,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 10)),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    height: returnResponsiveWidth(context, 0.3),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/house.jpg"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Center(
-                      child: Container(
-                        height: 50,
-                        width: 100,
-                        color: Colors.black.withAlpha(120),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Modelo 1',
-                          style: TextStyle(
-                              color: colorSubtitulos1,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 10)),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    height: returnResponsiveWidth(context, 0.3),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/house.jpg"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Center(
-                      child: Container(
-                        height: 50,
-                        width: 100,
-                        color: Colors.black.withAlpha(120),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Modelo 1',
-                          style: TextStyle(
-                              color: colorSubtitulos1,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                ],
+                ),
               ),
             ),
-          ],
-        ),
+            onTap: () => null,
+          );
+        },
       ),
     );
+  }
+}
+
+class Oferta {
+  String nombre;
+  String descripcion;
+  String nombreArchivo;
+  String nomConstructora;
+  String precio;
+
+  Oferta(String name, String descripcion, String nombreArchivo,
+      String nomConstructora, String precio) {
+    this.nombre = name;
+    this.descripcion = descripcion;
+    this.nombreArchivo = nombreArchivo;
+    this.nomConstructora = nomConstructora;
+    this.precio = precio;
   }
 }
