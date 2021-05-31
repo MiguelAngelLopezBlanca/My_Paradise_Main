@@ -25,7 +25,7 @@ class _Mas extends State<Mas> {
   }
 
   void getModels() async {
-    FirebaseFirestore.instance.collection('modelos').get().then(
+    await FirebaseFirestore.instance.collection('modelos').get().then(
       (QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach(
           (doc) {
@@ -41,6 +41,7 @@ class _Mas extends State<Mas> {
         print(_modelos.length);
       },
     );
+    setState(() {});
   }
 
   @override

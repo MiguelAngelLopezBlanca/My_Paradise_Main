@@ -33,7 +33,7 @@ class _ListadoOfertas extends State<ListadoOfertas> {
   }
 
   void getOfertas() async {
-    FirebaseFirestore.instance.collection('ofertas').get().then(
+    await FirebaseFirestore.instance.collection('ofertas').get().then(
       (QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach(
           (doc) {
@@ -50,6 +50,7 @@ class _ListadoOfertas extends State<ListadoOfertas> {
         print(_ofertas.length);
       },
     );
+    setState(() {});
   }
 
   @override
