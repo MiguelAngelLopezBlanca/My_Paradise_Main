@@ -66,19 +66,59 @@ class DetallesModelos extends StatelessWidget {
                 ),
                 color: Colors.white,
               ),
-              child: Row(
+              child: Column(
                 children: [
-                  Container(
-                    alignment: Alignment.topCenter,
-                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                    width: MediaQuery.of(context).size.width / 1.1,
-                    child: Text(
-                      modelo.descripcion,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: returnResponsiveFontSize(context, 18),
+                  Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.topCenter,
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 15,
+                            vertical: MediaQuery.of(context).size.width / 7),
+                        width: MediaQuery.of(context).size.width / 1.1,
+                        child: Text(
+                          modelo.descripcion,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: "Roboto",
+                            color: Colors.black,
+                            fontSize: returnResponsiveFontSize(context, 18),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      OutlinedButton(
+                        onPressed: () => null,
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: colorBotones,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(30),
+                              right: Radius.circular(
+                                30,
+                              ),
+                            ),
+                          ),
+                        ),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 1.4,
+                          height: 30,
+                          margin: EdgeInsets.only(top: 10),
+                          child: Text(
+                            "Solicitar Presupuesto",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
