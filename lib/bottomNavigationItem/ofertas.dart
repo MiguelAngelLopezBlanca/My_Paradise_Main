@@ -41,9 +41,10 @@ class _ListadoOfertas extends State<ListadoOfertas> {
             String descripcion = doc["descripcion"];
             String nombreArchivo = doc["nombreArchivo"];
             String nomConstructora = doc["nomConstructora"];
+            String nombreImagen = doc["nombreImagen"];
             String precio = doc["precio"];
-            Oferta oferta = new Oferta(
-                name, descripcion, nombreArchivo, nomConstructora, precio);
+            Oferta oferta = new Oferta(name, descripcion, nombreArchivo,
+                nomConstructora, precio, nombreImagen);
             _ofertas.add(oferta);
           },
         );
@@ -67,7 +68,8 @@ class _ListadoOfertas extends State<ListadoOfertas> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 image: DecorationImage(
-                  image: AssetImage("assets/images/house.jpg"),
+                  image: AssetImage(
+                      "assets/images/modelos/" + _ofertas[index].nombreImagen),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -107,14 +109,16 @@ class Oferta {
   String descripcion;
   String nombreArchivo;
   String nomConstructora;
+  String nombreImagen;
   String precio;
 
   Oferta(String nombre, String descripcion, String nombreArchivo,
-      String nomConstructora, String precio) {
+      String nomConstructora, String precio, String nombreImagen) {
     this.nombre = nombre;
     this.descripcion = descripcion;
     this.nombreArchivo = nombreArchivo;
     this.nomConstructora = nomConstructora;
     this.precio = precio;
+    this.nombreImagen = nombreImagen;
   }
 }

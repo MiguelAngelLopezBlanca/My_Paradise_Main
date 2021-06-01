@@ -192,6 +192,10 @@ class _HomePageState extends State<HomePage> {
                         final user = await auth.signInWithEmailAndPassword(
                             email: email, password: passwd);
                         if (user != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Hola de nuevo " +
+                                  auth.currentUser.displayName +
+                                  "!")));
                           handleNavigateTapToIniciarSesion(context);
                         }
                       } catch (e) {
