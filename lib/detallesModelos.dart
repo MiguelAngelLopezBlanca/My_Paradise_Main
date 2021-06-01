@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
@@ -10,6 +12,14 @@ class DetallesModelos extends StatelessWidget {
 
   DetallesModelos(this.modelo);
 
+  void handleNavigateTapToMas(BuildContext context) {
+    Navigator.of(context).push(
+      CupertinoPageRoute(
+        builder: (_) => Mas(),
+      ),
+    );
+  }
+
   double returnResponsiveWidth(context, double originalPercentValue) {
     return MediaQuery.of(context).size.width * originalPercentValue;
   }
@@ -21,6 +31,30 @@ class DetallesModelos extends StatelessWidget {
   double returnResponsiveFontSize(context, double originalValue) {
     return (MediaQuery.of(context).size.width * originalValue) /
         masterScreenWidth;
+  }
+
+  bool insertarPresupuesto() {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    String email = auth.currentUser.email;
+    String model = modelo.nombre;
+
+    bool done = false;
+
+    if (auth.currentUser == null) {
+      //LLEVA A PANTALLA DE INICIA SESION
+
+    } else {
+      CollectionReference collectionReference =
+          FirebaseFirestore.instance.collection("presupuestos");
+
+      collectionReference
+          .doc()
+          .set({'emailUsuario': email, 'nombreModelo': model});
+
+      done = true;
+    }
+
+    return done;
   }
 
   @override
@@ -91,7 +125,14 @@ class DetallesModelos extends StatelessWidget {
                   Column(
                     children: [
                       OutlinedButton(
-                        onPressed: () => null,
+                        onPressed: () async {
+                          if (await insertarPresupuesto()) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Presupuesto solicitado"),
+                            ));
+                            handleNavigateTapToMas(context);
+                          }
+                        },
                         style: OutlinedButton.styleFrom(
                           backgroundColor: colorBotones,
                           shape: const RoundedRectangleBorder(
