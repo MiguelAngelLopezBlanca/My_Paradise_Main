@@ -100,7 +100,7 @@ class _PerfilState extends State<Perfil> {
                             ),
                             Padding(padding: EdgeInsets.only(top: 30)),
                             Text(
-                              '123456789',
+                              auth.currentUser.phoneNumber.toString(),
                               style: TextStyle(
                                 color: colorTextos,
                                 fontSize: 16,
@@ -118,7 +118,7 @@ class _PerfilState extends State<Perfil> {
                                 ),
                                 color: Colors.white,
                                 image: DecorationImage(
-                                  image: AssetImage(auth.currentUser.photoURL),
+                                  image: AssetImage("assets/contacto.png"),
                                   fit: BoxFit.contain,
                                 ),
                               ),

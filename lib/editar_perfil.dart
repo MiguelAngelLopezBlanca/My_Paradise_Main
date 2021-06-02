@@ -12,29 +12,7 @@ class EditarPerfil extends StatefulWidget {
 class _EditarPerfil extends State<EditarPerfil> {
   File imageFile;
   FirebaseAuth auth = FirebaseAuth.instance;
-  String dsName, mail, passwd, passwdV;
-
-  void abrirGaleria(BuildContext context) async {
-    var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
-
-    this.setState(() {
-      imageFile = picture;
-    });
-  }
-
-  Widget verImagen() {
-    if (imageFile != null) {
-      return Image.file(imageFile,
-          width: returnResponsiveWidth(context, 0.3),
-          height: returnResponsiveHeight(context, 0.3));
-    } else {
-      return Text(
-        "Por favor seleccione una imagen",
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.white),
-      );
-    }
-  }
+  String dsName, telf, passwd, passwdV;
 
   double returnResponsiveWidth(context, double originalPercentValue) {
     return MediaQuery.of(context).size.width * originalPercentValue;
@@ -49,9 +27,12 @@ class _EditarPerfil extends State<EditarPerfil> {
         masterScreenWidth;
   }
 
-  void updateData() {
-    auth.currentUser
-        .updateProfile(displayName: dsName, photoURL: imageFile.path);
+  void updateData() async {
+    if (dsName != null && dsName.isNotEmpty) {
+      await auth.currentUser.updateProfile(displayName: dsName);
+    } else {}
+
+    Navigator.pop(context);
   }
 
   @override
@@ -82,28 +63,6 @@ class _EditarPerfil extends State<EditarPerfil> {
                     const SizedBox(
                       height: 10,
                     ),
-                    OutlinedButton(
-                      onPressed: () => abrirGaleria(context),
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.all(10.0),
-                        backgroundColor: colorSubtitulos1,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                      ),
-                      child: const Text(
-                        "Subir imagen",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    verImagen(),
                   ],
                 ),
               ),
@@ -138,57 +97,47 @@ class _EditarPerfil extends State<EditarPerfil> {
                       },
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
-                    TextField(
-                      decoration: new InputDecoration(
-                        fillColor: fondoTextField,
-                        filled: true,
-                        hintText: "Email",
-                        hintStyle: TextStyle(color: colorPrincipal),
-                        suffixIcon: const Icon(
-                          Icons.email,
-                          color: colorPrincipal,
-                        ),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                        border: new OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(10.0),
-                          ),
-                        ),
-                      ),
+                    Text(
+                      'Cambiar contraseña',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                          fontSize: returnResponsiveFontSize(context, 15)),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     TextField(
-                      decoration: new InputDecoration(
-                        fillColor: fondoTextField,
-                        filled: true,
-                        hintText: "Telefono",
-                        hintStyle: TextStyle(color: colorPrincipal),
-                        suffixIcon: const Icon(
-                          Icons.phone,
-                          color: colorPrincipal,
-                        ),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                        border: new OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(10.0),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextField(
+                      obscureText: true,
                       decoration: new InputDecoration(
                         fillColor: fondoTextField,
                         filled: true,
                         hintText: "Contraseña",
+                        hintStyle: TextStyle(color: colorPrincipal),
+                        suffixIcon: const Icon(
+                          Icons.remove_red_eye_rounded,
+                          color: colorPrincipal,
+                        ),
+                        contentPadding:
+                            EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                        border: new OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            const Radius.circular(10.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      decoration: new InputDecoration(
+                        fillColor: fondoTextField,
+                        filled: true,
+                        hintText: "Confirmar Contraseña",
                         hintStyle: TextStyle(color: colorPrincipal),
                         suffixIcon: const Icon(
                           Icons.remove_red_eye_rounded,
