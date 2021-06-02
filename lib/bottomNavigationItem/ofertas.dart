@@ -26,6 +26,11 @@ class _ListadoOfertas extends State<ListadoOfertas> {
     return MediaQuery.of(context).size.height * originalPercentValue;
   }
 
+  double returnResponsiveFontSize(context, double originalValue) {
+    return (MediaQuery.of(context).size.width * originalValue) /
+        masterScreenWidth;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -43,8 +48,9 @@ class _ListadoOfertas extends State<ListadoOfertas> {
             String nomConstructora = doc["nomConstructora"];
             String nombreImagen = doc["nombreImagen"];
             String precio = doc["precio"];
+            String telefono = doc["telfEmpresa"];
             Oferta oferta = new Oferta(name, descripcion, nombreArchivo,
-                nomConstructora, precio, nombreImagen);
+                nomConstructora, precio, nombreImagen, telefono);
             _ofertas.add(oferta);
           },
         );
@@ -63,30 +69,109 @@ class _ListadoOfertas extends State<ListadoOfertas> {
         itemBuilder: (context, index) {
           return InkWell(
             child: Container(
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
-              height: returnResponsiveWidth(context, 0.3),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                image: DecorationImage(
-                  image: AssetImage(
-                      "assets/images/modelos/" + _ofertas[index].nombreImagen),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Center(
-                child: Container(
-                  height: 50,
-                  width: 200,
-                  color: Colors.black.withAlpha(120),
-                  alignment: Alignment.center,
-                  child: Text(
-                    _ofertas[index].nombre,
-                    style: TextStyle(
-                        color: colorSubtitulos1,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20, 0, 0, 30),
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: primaryColor.withOpacity(0.8),
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/modelos/' +
+                                _ofertas[index].nombreImagen),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        transform: Matrix4.translationValues(-20, 0, 0),
+                        margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                        width: MediaQuery.of(context).size.width / 1.5,
+                        height: MediaQuery.of(context).size.height / 8,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: primaryColor.withOpacity(0.8),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 10),
+                                    ),
+                                    Text(
+                                      _ofertas[index].nombre,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: returnResponsiveFontSize(
+                                            context, 20),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          'Constructora: ',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: returnResponsiveFontSize(
+                                                context, 18),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
+                                          child: Text(
+                                            _ofertas[index].nomConstructora,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize:
+                                                  returnResponsiveFontSize(
+                                                      context, 16),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 5),
+                                          child: Text(
+                                            'PRECIO: ' +
+                                                _ofertas[index].precio +
+                                                '€',
+                                            style:
+                                                TextStyle(color: colorTextos),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ),
+                ],
               ),
             ),
             onTap: () {
@@ -111,14 +196,22 @@ class Oferta {
   String nomConstructora;
   String nombreImagen;
   String precio;
+  String telefono;
 
-  Oferta(String nombre, String descripcion, String nombreArchivo,
-      String nomConstructora, String precio, String nombreImagen) {
+  Oferta(
+      String nombre,
+      String descripcion,
+      String nombreArchivo,
+      String nomConstructora,
+      String precio,
+      String nombreImagen,
+      String telefono) {
     this.nombre = nombre;
     this.descripcion = descripcion;
     this.nombreArchivo = nombreArchivo;
     this.nomConstructora = nomConstructora;
     this.precio = precio;
     this.nombreImagen = nombreImagen;
+    this.telefono = telefono;
   }
 }
