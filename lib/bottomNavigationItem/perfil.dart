@@ -1,10 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:my_paradise/editar_perfil.dart';
 import 'package:my_paradise/home_page.dart';
+import 'package:my_paradise/listado_presupuestos.dart';
 import 'package:my_paradise/ui_constants.dart';
 
 class Perfil extends StatefulWidget {
@@ -20,6 +19,14 @@ class _PerfilState extends State<Perfil> {
     Navigator.of(context).push(
       CupertinoPageRoute(
         builder: (_) => EditarPerfil(),
+      ),
+    );
+  }
+
+  void handleNavigateTapToListadoPresupuestos(BuildContext context) {
+    Navigator.of(context).push(
+      CupertinoPageRoute(
+        builder: (_) => ListadoPresupuestos(),
       ),
     );
   }
@@ -153,7 +160,8 @@ class _PerfilState extends State<Perfil> {
                             ),
                           ),
                         ),
-                        onTap: () => null,
+                        onTap: () =>
+                            handleNavigateTapToListadoPresupuestos(context),
                       ),
                     ],
                   ),
