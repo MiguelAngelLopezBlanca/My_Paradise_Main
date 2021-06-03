@@ -207,46 +207,6 @@ class DetallesOfertas extends StatelessWidget {
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            OutlinedButton(
-                              onPressed: () async {},
-                              style: OutlinedButton.styleFrom(
-                                backgroundColor: colorBotones,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(30),
-                                    right: Radius.circular(
-                                      30,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width / 1.4,
-                                height: 30,
-                                margin: EdgeInsets.only(top: 10),
-                                child: Text(
-                                  "Solicitar Oferta",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    )
                   ],
                 ),
               ],

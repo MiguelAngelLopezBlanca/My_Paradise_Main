@@ -199,7 +199,8 @@ class _HomePageState extends State<HomePage> {
                           handleNavigateTapToIniciarSesion(context);
                         }
                       } catch (e) {
-                        print("ERROR: " + e.message);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Email o contraseña no válidos.")));
                       }
                     },
                     style: OutlinedButton.styleFrom(

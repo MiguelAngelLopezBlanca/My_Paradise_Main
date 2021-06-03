@@ -130,7 +130,7 @@ class DetallesModelos extends StatelessWidget {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text("Presupuesto solicitado"),
                             ));
-                            handleNavigateTapToMas(context);
+                            Navigator.pop(context);
                           }
                         },
                         style: OutlinedButton.styleFrom(
