@@ -129,11 +129,25 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
                         tapBodyToCollapse: true,
                       ),
                       header: Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Text(
-                            _presupuestos[index].nombreModelo,
-                            style: Theme.of(context).textTheme.body2,
-                          )),
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  _presupuestos[index].nombreModelo,
+                                  style: Theme.of(context).textTheme.body2,
+                                ),
+                                InkWell(
+                                  child: Icon(Icons.delete),
+                                  onTap: () => null,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                       collapsed: Text(
                         getDescriptionModel(_presupuestos[index].nombreModelo),
                         softWrap: true,
