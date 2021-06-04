@@ -48,6 +48,11 @@ class _PerfilState extends State<Perfil> {
     return MediaQuery.of(context).size.height * originalPercentValue;
   }
 
+  double returnResponsiveFontSize(context, double originalValue) {
+    return (MediaQuery.of(context).size.width * originalValue) /
+        masterScreenWidth;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +78,7 @@ class _PerfilState extends State<Perfil> {
             children: [
               Container(
                 width: 220,
-                height: 420,
+                height: 360,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(100),
@@ -89,28 +94,27 @@ class _PerfilState extends State<Perfil> {
                         Column(
                           children: [
                             Padding(padding: EdgeInsets.only(top: 70)),
-                            Text(
-                              auth.currentUser.displayName,
-                              style: TextStyle(
-                                color: colorTextos,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
+                            Container(
+                              child: Text(
+                                auth.currentUser.displayName,
+                                style: TextStyle(
+                                  color: colorTextos,
+                                  fontSize:
+                                      returnResponsiveFontSize(context, 20),
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
                             ),
                             Padding(padding: EdgeInsets.only(top: 30)),
-                            Text(
-                              auth.currentUser.email,
-                              style: TextStyle(
-                                color: colorTextos,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Padding(padding: EdgeInsets.only(top: 30)),
-                            Text(
-                              auth.currentUser.phoneNumber.toString(),
-                              style: TextStyle(
-                                color: colorTextos,
-                                fontSize: 16,
+                            Container(
+                              child: Text(
+                                auth.currentUser.email,
+                                style: TextStyle(
+                                  color: colorTextos,
+                                  fontSize:
+                                      returnResponsiveFontSize(context, 18),
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
                             ),
                             Padding(padding: EdgeInsets.only(top: 30)),

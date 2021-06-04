@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_paradise/ui_constants.dart';
 
-class noUser extends StatefulWidget {
-  _noUser createState() => _noUser();
+class NoUser extends StatefulWidget {
+  _NoUser createState() => _NoUser();
 }
 
-class _noUser extends State<noUser> {
+class _NoUser extends State<NoUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

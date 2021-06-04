@@ -40,6 +40,19 @@ class _EditarPerfil extends State<EditarPerfil> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: colorSubtitulos2,
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.white,
+        title: Text(
+          auth.currentUser.displayName,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+          ),
+        ),
+      ),
       body: Stack(
         fit: StackFit.expand,
         children: [

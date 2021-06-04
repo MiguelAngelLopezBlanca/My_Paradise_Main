@@ -65,149 +65,173 @@ class DetallesOfertas extends StatelessWidget {
                     ),
                   ],
                 ),
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Container(
+                  height: returnResponsiveHeight(context, 0.461),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: Column(
                       children: [
-                        Column(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            Column(
                               children: [
-                                Column(
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Row(
+                                    Column(
                                       children: [
-                                        Icon(Icons.business),
-                                        Padding(
-                                            padding: EdgeInsets.only(right: 5)),
-                                        Text(
-                                          'Constructora',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: returnResponsiveFontSize(
-                                                context, 25),
-                                            fontWeight: FontWeight.w800,
-                                          ),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.business),
+                                            Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 5)),
+                                            Text(
+                                              'Constructora',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize:
+                                                    returnResponsiveFontSize(
+                                                        context, 25),
+                                                fontWeight: FontWeight.w800,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              ofertas.nomConstructora,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: returnResponsiveFontSize(context, 18),
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Icon(Icons.phone),
-                                        Padding(
-                                            padding: EdgeInsets.only(right: 5)),
-                                        Text(
-                                          'Telefono',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: returnResponsiveFontSize(
-                                                context, 25),
-                                            fontWeight: FontWeight.w800,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                const SizedBox(
+                                  height: 20,
                                 ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              ofertas.telefono,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: returnResponsiveFontSize(context, 18),
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width / 12,
-                                  top: 20),
-                              width: MediaQuery.of(context).size.width / 1.2,
-                              child: Text(
-                                ofertas.descripcion,
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize:
-                                      returnResponsiveFontSize(context, 18),
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.monetization_on,
-                                  color: Colors.white,
-                                  size: 40,
-                                ),
-                                Padding(padding: EdgeInsets.only(right: 15)),
                                 Text(
-                                  'PRECIO: ' + ofertas.precio + '€',
+                                  ofertas.nomConstructora,
                                   style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize:
+                                        returnResponsiveFontSize(context, 18),
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(Icons.phone),
+                                            Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 5)),
+                                            Text(
+                                              'Telefono',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize:
+                                                    returnResponsiveFontSize(
+                                                        context, 25),
+                                                fontWeight: FontWeight.w800,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  ofertas.telefono,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize:
+                                        returnResponsiveFontSize(context, 18),
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Column(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width /
+                                          12,
+                                      top: 20),
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.2,
+                                  child: Text(
+                                    ofertas.descripcion,
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontSize:
-                                          returnResponsiveFontSize(context, 20),
-                                      fontWeight: FontWeight.w700),
-                                ),
+                                          returnResponsiveFontSize(context, 18),
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.monetization_on,
+                                      color: Colors.black,
+                                      size: 40,
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(right: 15)),
+                                    Text(
+                                      'PRECIO: ' + ofertas.precio + '€',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: returnResponsiveFontSize(
+                                              context, 20),
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ],
+                                )
                               ],
                             )
                           ],
-                        )
+                        ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),

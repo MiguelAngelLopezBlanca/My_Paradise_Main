@@ -1,137 +1,188 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
+import 'package:expandable/expandable.dart';
 
-import 'bottomNavigationItem/ofertas.dart';
+import 'bottomNavigationItem/mas.dart';
 
 class ListadoPresupuestos extends StatefulWidget {
   _ListadoPresupuestos createState() => _ListadoPresupuestos();
 }
 
 class _ListadoPresupuestos extends State<ListadoPresupuestos> {
-  final List<Color> _colors = Colors.primaries;
-
-  static const _minHeight = 16.0;
-  static const _maxHeight = 120.0;
-
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  List<Oferta> _ofertas = [];
+  List<Presupuesto> _presupuestos = [];
+  List<Modelo> _modelos = [];
 
   @override
   void initState() {
     super.initState();
-    getOfertas();
+    getPresupuestos();
+    getModels();
   }
 
-  void getOfertas() async {
-    await FirebaseFirestore.instance.collection('ofertas').get().then(
+  void getPresupuestos() async {
+    await FirebaseFirestore.instance.collection('presupuestos').get().then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            String name = doc["nombreModelo"];
+            String email = doc["emailUsuario"];
+            Presupuesto presupuesto = new Presupuesto(name, email);
+            if (presupuesto.emailUsuario == auth.currentUser.email) {
+              _presupuestos.add(presupuesto);
+            }
+          },
+        );
+        print(_presupuestos.length);
+      },
+    );
+    setState(() {});
+  }
+
+  String getImageModel(String nombreModelo) {
+    for (var item in _modelos) {
+      if (item.nombre == nombreModelo) {
+        return item.nombreImagen;
+      }
+    }
+  }
+
+  String getDescriptionModel(String descripcionModelo) {
+    for (var item in _modelos) {
+      if (item.nombre == descripcionModelo) {
+        return item.descripcion;
+      }
+    }
+  }
+
+  void getModels() async {
+    await FirebaseFirestore.instance.collection('modelos').get().then(
       (QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach(
           (doc) {
             String name = doc["nombre"];
             String descripcion = doc["descripcion"];
             String nombreArchivo = doc["nombreArchivo"];
-            String nomConstructora = doc["nomConstructora"];
             String nombreImagen = doc["nombreImagen"];
-            String precio = doc["precio"];
-            String telefono = doc["telfEmpresa"];
-            Oferta oferta = new Oferta(name, descripcion, nombreArchivo,
-                nomConstructora, precio, nombreImagen, telefono);
-            _ofertas.add(oferta);
+            Modelo modelo =
+                new Modelo(name, descripcion, nombreArchivo, nombreImagen);
+            _modelos.add(modelo);
           },
         );
-        print(_ofertas.length);
+        print(_modelos.length);
       },
     );
     setState(() {});
   }
 
   @override
-  Widget build(BuildContext context) => CustomScrollView(
-        slivers: _colors
-            .map(
-              (color) => StackedListChild(
-                minHeight: _minHeight,
-                maxHeight: _colors.indexOf(color) == _colors.length - 1
-                    ? MediaQuery.of(context).size.height
-                    : _maxHeight,
-                pinned: true,
-                child: Container(
-                  color: _colors.indexOf(color) == 0
-                      ? Colors.black
-                      : _colors[_colors.indexOf(color) - 1],
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(_minHeight)),
-                      color: color,
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.white,
+        title: Text(
+          'Listado Presupuestos',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+          ),
+        ),
+      ),
+      body: ListView.builder(
+        itemCount: _presupuestos.length,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) {
+          return ExpandableNotifier(
+              child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Card(
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 150,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        shape: BoxShape.rectangle,
+                        image: DecorationImage(
+                            image: AssetImage(
+                              'assets/images/modelos/' +
+                                  getImageModel(
+                                      _presupuestos[index].nombreModelo),
+                            ),
+                            fit: BoxFit.cover),
+                      ),
                     ),
                   ),
-                ),
+                  ScrollOnExpand(
+                    scrollOnExpand: true,
+                    scrollOnCollapse: false,
+                    child: ExpandablePanel(
+                      theme: const ExpandableThemeData(
+                        headerAlignment: ExpandablePanelHeaderAlignment.center,
+                        tapBodyToCollapse: true,
+                      ),
+                      header: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            _presupuestos[index].nombreModelo,
+                            style: Theme.of(context).textTheme.body2,
+                          )),
+                      collapsed: Text(
+                        getDescriptionModel(_presupuestos[index].nombreModelo),
+                        softWrap: true,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      expanded: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 10),
+                            child: Text(
+                              getDescriptionModel(
+                                  _presupuestos[index].nombreModelo),
+                              softWrap: true,
+                              overflow: TextOverflow.fade,
+                            ),
+                          ),
+                        ],
+                      ),
+                      builder: (_, collapsed, expanded) {
+                        return Padding(
+                          padding:
+                              EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                          child: Expandable(
+                            collapsed: collapsed,
+                            expanded: expanded,
+                            theme: const ExpandableThemeData(crossFadePoint: 0),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-            )
-            .toList(),
-      );
-}
-
-class StackedListChild extends StatelessWidget {
-  final double minHeight;
-  final double maxHeight;
-  final bool pinned;
-  final bool floating;
-  final Widget child;
-
-  SliverPersistentHeaderDelegate get _delegate => _StackedListDelegate(
-      minHeight: minHeight, maxHeight: maxHeight, child: child);
-
-  const StackedListChild({
-    Key key,
-    @required this.minHeight,
-    @required this.maxHeight,
-    @required this.child,
-    this.pinned = false,
-    this.floating = false,
-  })  : assert(child != null),
-        assert(minHeight != null),
-        assert(maxHeight != null),
-        assert(pinned != null),
-        assert(floating != null),
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) => SliverPersistentHeader(
-      key: key, pinned: pinned, floating: floating, delegate: _delegate);
-}
-
-class _StackedListDelegate extends SliverPersistentHeaderDelegate {
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-
-  _StackedListDelegate({
-    @required this.minHeight,
-    @required this.maxHeight,
-    @required this.child,
-  });
-
-  @override
-  double get minExtent => minHeight;
-
-  @override
-  double get maxExtent => math.max(maxHeight, minHeight);
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new SizedBox.expand(child: child);
+            ),
+          ));
+        },
+      ),
+    );
   }
+}
 
-  @override
-  bool shouldRebuild(_StackedListDelegate oldDelegate) {
-    return maxHeight != oldDelegate.maxHeight ||
-        minHeight != oldDelegate.minHeight ||
-        child != oldDelegate.child;
+class Presupuesto {
+  String nombreModelo;
+  String emailUsuario;
+
+  Presupuesto(String nombreModelo, String emailUsuario) {
+    this.nombreModelo = nombreModelo;
+    this.emailUsuario = emailUsuario;
   }
 }

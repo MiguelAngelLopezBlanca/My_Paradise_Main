@@ -74,7 +74,7 @@ class _ListadoOfertas extends State<ListadoOfertas> {
                   Row(
                     children: [
                       Container(
-                        margin: EdgeInsets.fromLTRB(20, 0, 0, 30),
+                        margin: EdgeInsets.fromLTRB(30, 0, 0, 30),
                         width: 100,
                         height: 100,
                         decoration: BoxDecoration(

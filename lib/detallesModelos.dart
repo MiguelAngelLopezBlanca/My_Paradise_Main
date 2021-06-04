@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
+import 'package:my_paradise/no_user.dart';
 import 'package:my_paradise/ui_constants.dart';
 
 import 'bottomNavigationItem/mas.dart';
@@ -16,6 +17,14 @@ class DetallesModelos extends StatelessWidget {
     Navigator.of(context).push(
       CupertinoPageRoute(
         builder: (_) => Mas(),
+      ),
+    );
+  }
+
+  void handleNavigateTapNoUser(BuildContext context) {
+    Navigator.of(context).push(
+      CupertinoPageRoute(
+        builder: (_) => NoUser(),
       ),
     );
   }
@@ -40,19 +49,14 @@ class DetallesModelos extends StatelessWidget {
 
     bool done = false;
 
-    if (auth.currentUser == null) {
-      //LLEVA A PANTALLA DE INICIA SESION
+    CollectionReference collectionReference =
+        FirebaseFirestore.instance.collection("presupuestos");
 
-    } else {
-      CollectionReference collectionReference =
-          FirebaseFirestore.instance.collection("presupuestos");
+    collectionReference
+        .doc()
+        .set({'emailUsuario': email, 'nombreModelo': model});
 
-      collectionReference
-          .doc()
-          .set({'emailUsuario': email, 'nombreModelo': model});
-
-      done = true;
-    }
+    done = true;
 
     return done;
   }
