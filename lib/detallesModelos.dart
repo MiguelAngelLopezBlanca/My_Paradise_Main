@@ -10,6 +10,7 @@ import 'bottomNavigationItem/mas.dart';
 
 class DetallesModelos extends StatelessWidget {
   final Modelo modelo;
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   DetallesModelos(this.modelo);
 
@@ -43,7 +44,6 @@ class DetallesModelos extends StatelessWidget {
   }
 
   bool insertarPresupuesto() {
-    FirebaseAuth auth = FirebaseAuth.instance;
     String email = auth.currentUser.email;
     String model = modelo.nombre;
 
@@ -130,11 +130,16 @@ class DetallesModelos extends StatelessWidget {
                     children: [
                       OutlinedButton(
                         onPressed: () async {
-                          if (await insertarPresupuesto()) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("Presupuesto solicitado"),
-                            ));
-                            Navigator.pop(context);
+                          if (auth.currentUser != null) {
+                            if (await insertarPresupuesto()) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text("Presupuesto solicitado"),
+                              ));
+                              Navigator.pop(context);
+                            }
+                          } else {
+                            handleNavigateTapNoUser(context);
                           }
                         },
                         style: OutlinedButton.styleFrom(

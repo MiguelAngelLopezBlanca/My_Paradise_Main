@@ -6,6 +6,7 @@ import 'package:my_paradise/bottomNavigationItem/ofertas.dart';
 import 'package:my_paradise/bottomNavigationItem/perfil.dart';
 
 import '../home_page.dart';
+import '../no_user.dart';
 import '../ui_constants.dart';
 
 class Menu extends StatefulWidget {
@@ -27,6 +28,14 @@ class _MenuState extends State<Menu> {
     Navigator.of(context).push(
       CupertinoPageRoute(
         builder: (_) => HomePage(),
+      ),
+    );
+  }
+
+  void handleNavigateTapToNoUser(BuildContext context) {
+    Navigator.of(context).push(
+      CupertinoPageRoute(
+        builder: (_) => NoUser(),
       ),
     );
   }
@@ -68,7 +77,7 @@ class _MenuState extends State<Menu> {
               } else {
                 if (index == 2) {
                   print('No has iniciado sesion');
-                  handleNavigateTapToHomePage(context);
+                  handleNavigateTapToNoUser(context);
                 } else {
                   _menuActual = index;
                 }
