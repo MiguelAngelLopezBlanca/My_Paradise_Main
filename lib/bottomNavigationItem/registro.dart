@@ -13,8 +13,6 @@ class Registro extends StatefulWidget {
 }
 
 class _Registro extends State<Registro> {
-  File imageFile;
-
   void handleNavigateTapToHome(BuildContext context) {
     Navigator.of(context).push(
       CupertinoPageRoute(
@@ -34,28 +32,6 @@ class _Registro extends State<Registro> {
 
   double returnResponsiveHeight(context, double originalPercentValue) {
     return MediaQuery.of(context).size.height * originalPercentValue;
-  }
-
-  void abrirGaleria(BuildContext context) async {
-    var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
-
-    this.setState(() {
-      imageFile = picture;
-    });
-  }
-
-  Widget verImagen() {
-    if (imageFile != null) {
-      return Image.file(imageFile,
-          width: returnResponsiveWidth(context, 0.2),
-          height: returnResponsiveHeight(context, 0.1));
-    } else {
-      return Text(
-        "Por favor seleccione una imagen",
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.white),
-      );
-    }
   }
 
   String dsName, mail, passwd, passwdV;
@@ -115,7 +91,7 @@ class _Registro extends State<Registro> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Padding(padding: const EdgeInsets.fromLTRB(0, 50, 0, 0)),
+              Padding(padding: const EdgeInsets.fromLTRB(0, 60, 0, 0)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -131,26 +107,10 @@ class _Registro extends State<Registro> {
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      InkWell(
-                        child: Icon(
-                          Icons.camera,
-                          color: Colors.white,
-                          size: 50,
-                        ),
-                        onTap: () => abrirGaleria(context),
-                      ),
-                    ],
-                  )
                 ],
               ),
               const SizedBox(
                 height: 20,
-              ),
-              verImagen(),
-              const SizedBox(
-                height: 30,
               ),
               FractionallySizedBox(
                 widthFactor: 0.75,
