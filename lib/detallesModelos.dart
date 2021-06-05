@@ -143,7 +143,7 @@ class DetallesModelos extends StatelessWidget {
                         alignment: Alignment.topCenter,
                         margin: EdgeInsets.symmetric(
                             horizontal: 15,
-                            vertical: MediaQuery.of(context).size.width / 7),
+                            vertical: MediaQuery.of(context).size.width / 10),
                         width: MediaQuery.of(context).size.width / 1.1,
                         child: Text(
                           modelo.descripcion,
@@ -194,7 +194,7 @@ class DetallesModelos extends StatelessWidget {
                         child: Container(
                           width: MediaQuery.of(context).size.width / 1.4,
                           height: 30,
-                          margin: EdgeInsets.only(top: 10),
+                          margin: EdgeInsets.only(top: 5),
                           child: Text(
                             "Solicitar Presupuesto",
                             textAlign: TextAlign.center,
