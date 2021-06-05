@@ -7,10 +7,12 @@ import 'package:my_paradise/no_user.dart';
 import 'package:my_paradise/ui_constants.dart';
 
 import 'bottomNavigationItem/mas.dart';
+import 'listado_presupuestos.dart';
 
 class DetallesModelos extends StatelessWidget {
   final Modelo modelo;
   FirebaseAuth auth = FirebaseAuth.instance;
+  List<Presupuesto> _presupuestos = [];
 
   DetallesModelos(this.modelo);
 
@@ -28,6 +30,34 @@ class DetallesModelos extends StatelessWidget {
         builder: (_) => NoUser(),
       ),
     );
+  }
+
+  void getPresupuestos() async {
+    await FirebaseFirestore.instance.collection('presupuestos').get().then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            String name = doc["nombreModelo"];
+            String email = doc["emailUsuario"];
+            Presupuesto presupuesto = new Presupuesto(name, email);
+            if (presupuesto.emailUsuario == auth.currentUser.email) {
+              _presupuestos.add(presupuesto);
+            }
+          },
+        );
+        print(_presupuestos.length);
+      },
+    );
+  }
+
+  bool comprobarModelo(String nombre) {
+    for (int i = 0; i < _presupuestos.length; i++) {
+      if (_presupuestos[i].nombreModelo == nombre) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   double returnResponsiveWidth(context, double originalPercentValue) {
@@ -63,6 +93,7 @@ class DetallesModelos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getPresupuestos();
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -131,7 +162,14 @@ class DetallesModelos extends StatelessWidget {
                       OutlinedButton(
                         onPressed: () async {
                           if (auth.currentUser != null) {
-                            if (await insertarPresupuesto()) {
+                            if (comprobarModelo(modelo.nombre) == true) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(
+                                    "Ya has solicitado presupuesto para este proyecto"),
+                              ));
+                            } else {
+                              insertarPresupuesto();
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
                                 content: Text("Presupuesto solicitado"),
