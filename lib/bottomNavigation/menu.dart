@@ -41,6 +41,12 @@ class _MenuState extends State<Menu> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _paginas[_menuActual],

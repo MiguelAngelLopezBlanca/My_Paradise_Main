@@ -12,7 +12,7 @@ class EditarPerfil extends StatefulWidget {
 class _EditarPerfil extends State<EditarPerfil> {
   File imageFile;
   FirebaseAuth auth = FirebaseAuth.instance;
-  String dsName, telf, passwd, passwdV;
+  String dsName, passwd, passwdV;
 
   double returnResponsiveWidth(context, double originalPercentValue) {
     return MediaQuery.of(context).size.width * originalPercentValue;
@@ -30,7 +30,16 @@ class _EditarPerfil extends State<EditarPerfil> {
   void updateData() async {
     if (dsName != null && dsName.isNotEmpty) {
       await auth.currentUser.updateProfile(displayName: dsName);
-    } else {}
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Datos de usuario actualizados"),
+      ));
+    }
+    if (passwd != null && passwd.isNotEmpty && passwd == passwdV) {
+      auth.currentUser.updatePassword(passwd);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Datos de usuario actualizados"),
+      ));
+    }
 
     Navigator.pop(context);
   }
@@ -142,11 +151,15 @@ class _EditarPerfil extends State<EditarPerfil> {
                           ),
                         ),
                       ),
+                      onChanged: (value) {
+                        passwd = value;
+                      },
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     TextField(
+                      obscureText: true,
                       decoration: new InputDecoration(
                         fillColor: fondoTextField,
                         filled: true,
@@ -164,6 +177,9 @@ class _EditarPerfil extends State<EditarPerfil> {
                           ),
                         ),
                       ),
+                      onChanged: (value) {
+                        passwdV = value;
+                      },
                     ),
                     const SizedBox(
                       height: 20,

@@ -20,6 +20,7 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
     super.initState();
     getPresupuestos();
     getModels();
+    print(_presupuestos.toString());
   }
 
   void getPresupuestos() async {
@@ -41,7 +42,7 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
     setState(() {});
   }
 
-  void deletePresupuesto(String nombreModelo) async {
+  Future deletePresupuesto(String nombreModelo) async {
     await FirebaseFirestore.instance.collection('presupuestos').get().then(
       (QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach(
@@ -52,7 +53,6 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
                   .collection('presupuestos')
                   .doc(doc.id)
                   .delete();
-              setState(() {});
               return;
             }
           },

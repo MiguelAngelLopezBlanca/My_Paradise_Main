@@ -23,6 +23,11 @@ class _PerfilState extends State<Perfil> {
     );
   }
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   void handleNavigateTapToListadoPresupuestos(BuildContext context) {
     Navigator.of(context).push(
       CupertinoPageRoute(
