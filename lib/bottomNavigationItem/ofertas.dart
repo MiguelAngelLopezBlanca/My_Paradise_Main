@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -75,111 +76,114 @@ class _ListadoOfertas extends State<ListadoOfertas> {
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
             return InkWell(
-              child: Container(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(30, 0, 0, 30),
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: primaryColor.withOpacity(0.8),
-                            image: DecorationImage(
-                              image: AssetImage('assets/images/modelos/' +
-                                  _ofertas[index].nombreImagen),
-                              fit: BoxFit.cover,
+              child: SlideInLeft(
+                duration: Duration(seconds: 1),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(30, 0, 0, 30),
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: primaryColor.withOpacity(0.8),
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/modelos/' +
+                                    _ofertas[index].nombreImagen),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                          transform: Matrix4.translationValues(-20, 0, 0),
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
-                          width: MediaQuery.of(context).size.width / 1.5,
-                          height: MediaQuery.of(context).size.height / 8,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: primaryColor.withOpacity(0.8),
-                          ),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 10),
-                                      ),
-                                      Text(
-                                        _ofertas[index].nombre,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: returnResponsiveFontSize(
-                                              context, 20),
+                          Container(
+                            transform: Matrix4.translationValues(-20, 0, 0),
+                            margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                            width: MediaQuery.of(context).size.width / 1.5,
+                            height: MediaQuery.of(context).size.height / 8,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: primaryColor.withOpacity(0.8),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 10),
                                         ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Text(
-                                            'Constructora: ',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Colors.black45,
-                                              fontSize:
-                                                  returnResponsiveFontSize(
-                                                      context, 18),
-                                            ),
+                                        Text(
+                                          _ofertas[index].nombre,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: returnResponsiveFontSize(
+                                                context, 20),
                                           ),
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                4,
-                                            child: Text(
-                                              _ofertas[index].nomConstructora,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(
+                                              'Constructora: ',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: Colors.white,
+                                                color: Colors.black45,
                                                 fontSize:
                                                     returnResponsiveFontSize(
-                                                        context, 16),
+                                                        context, 18),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(top: 5),
-                                            child: Text(
-                                              'PRECIO: ' +
-                                                  _ofertas[index].precio +
-                                                  '€',
-                                              style:
-                                                  TextStyle(color: colorTextos),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  4,
+                                              child: Text(
+                                                _ofertas[index].nomConstructora,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize:
+                                                      returnResponsiveFontSize(
+                                                          context, 16),
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(top: 5),
+                                              child: Text(
+                                                'PRECIO: ' +
+                                                    _ofertas[index].precio +
+                                                    '€',
+                                                style: TextStyle(
+                                                    color: colorTextos),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               onTap: () {
