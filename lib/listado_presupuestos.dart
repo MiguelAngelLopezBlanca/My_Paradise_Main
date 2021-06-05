@@ -41,6 +41,27 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
     setState(() {});
   }
 
+  void deletePresupuesto(String nombreModelo) async {
+    await FirebaseFirestore.instance.collection('presupuestos').get().then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            String name = doc["nombreModelo"];
+            if (name == nombreModelo) {
+              FirebaseFirestore.instance
+                  .collection('presupuestos')
+                  .doc(doc.id)
+                  .delete();
+              setState(() {});
+              return;
+            }
+          },
+        );
+        print(_presupuestos.length);
+      },
+    );
+  }
+
   String getImageModel(String nombreModelo) {
     for (var item in _modelos) {
       if (item.nombre == nombreModelo) {
@@ -141,7 +162,11 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
                                 ),
                                 InkWell(
                                   child: Icon(Icons.delete),
-                                  onTap: () => null,
+                                  onTap: () async {
+                                    await deletePresupuesto(
+                                        _presupuestos[index].nombreModelo);
+                                    setState(() {});
+                                  },
                                 ),
                               ],
                             ),
