@@ -1,8 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_paradise/ui_constants.dart';
 
+import 'home_page.dart';
+
 class NoUser extends StatefulWidget {
   _NoUser createState() => _NoUser();
+}
+
+void handleNavigateTapToHome(BuildContext context) {
+  Navigator.of(context).push(
+    CupertinoPageRoute(
+      builder: (_) => HomePage(),
+    ),
+  );
 }
 
 class _NoUser extends State<NoUser> {
@@ -33,7 +44,9 @@ class _NoUser extends State<NoUser> {
                       height: 40,
                     ),
                     OutlinedButton(
-                      onPressed: () async {},
+                      onPressed: () {
+                        handleNavigateTapToHome(context);
+                      },
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.all(10.0),
                         backgroundColor: colorBotones,
