@@ -65,6 +65,12 @@ class _PerfilState extends State<Perfil> {
       body: Stack(
         fit: StackFit.expand,
         children: [
+          Positioned.fill(
+            child: Image(
+              image: AssetImage('assets/images/fondo_perfil.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
           Column(
             children: [
               Padding(

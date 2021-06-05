@@ -110,6 +110,12 @@ class DetallesModelos extends StatelessWidget {
       ),
       body: Stack(
         children: [
+          Positioned.fill(
+            child: Image(
+              image: AssetImage('assets/images/fondo_modelo.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           Container(
             width: returnResponsiveWidth(context, 1),
             height: returnResponsiveHeight(context, 0.6),

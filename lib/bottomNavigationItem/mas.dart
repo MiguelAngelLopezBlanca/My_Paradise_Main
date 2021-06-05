@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_paradise/detallesModelos.dart';
 
+import '../ui_constants.dart';
+
 class Mas extends StatefulWidget {
   @override
   _Mas createState() => _Mas();
@@ -47,6 +49,7 @@ class _Mas extends State<Mas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: fourthColor,
       body: ListView.builder(
         itemCount: _modelos.length,
         scrollDirection: Axis.horizontal,

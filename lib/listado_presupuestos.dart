@@ -114,103 +114,114 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: _presupuestos.length,
-        scrollDirection: Axis.vertical,
-        itemBuilder: (context, index) {
-          return ExpandableNotifier(
-              child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Card(
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 150,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.orange,
-                        shape: BoxShape.rectangle,
-                        image: DecorationImage(
-                            image: AssetImage(
-                              'assets/images/modelos/' +
-                                  getImageModel(
-                                      _presupuestos[index].nombreModelo),
-                            ),
-                            fit: BoxFit.cover),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/fondo_presupuestos.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: ListView.builder(
+          itemCount: _presupuestos.length,
+          scrollDirection: Axis.vertical,
+          itemBuilder: (context, index) {
+            return ExpandableNotifier(
+                child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Card(
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 150,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          image: DecorationImage(
+                              image: AssetImage(
+                                'assets/images/modelos/' +
+                                    getImageModel(
+                                        _presupuestos[index].nombreModelo),
+                              ),
+                              fit: BoxFit.cover),
+                        ),
                       ),
                     ),
-                  ),
-                  ScrollOnExpand(
-                    scrollOnExpand: true,
-                    scrollOnCollapse: false,
-                    child: ExpandablePanel(
-                      theme: const ExpandableThemeData(
-                        headerAlignment: ExpandablePanelHeaderAlignment.center,
-                        tapBodyToCollapse: true,
-                      ),
-                      header: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  _presupuestos[index].nombreModelo,
-                                  style: Theme.of(context).textTheme.body2,
-                                ),
-                                InkWell(
-                                  child: Icon(Icons.delete),
-                                  onTap: () async {
-                                    await deletePresupuesto(
-                                        _presupuestos[index].nombreModelo);
-                                    setState(() {});
-                                  },
-                                ),
-                              ],
+                    ScrollOnExpand(
+                      scrollOnExpand: true,
+                      scrollOnCollapse: false,
+                      child: ExpandablePanel(
+                        theme: const ExpandableThemeData(
+                          headerAlignment:
+                              ExpandablePanelHeaderAlignment.center,
+                          tapBodyToCollapse: true,
+                        ),
+                        header: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    _presupuestos[index].nombreModelo,
+                                    style: Theme.of(context).textTheme.body2,
+                                  ),
+                                  InkWell(
+                                    child: Icon(Icons.delete),
+                                    onTap: () async {
+                                      await deletePresupuesto(
+                                          _presupuestos[index].nombreModelo);
+                                      setState(() {});
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        collapsed: Text(
+                          getDescriptionModel(
+                              _presupuestos[index].nombreModelo),
+                          softWrap: true,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        expanded: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 10),
+                              child: Text(
+                                getDescriptionModel(
+                                    _presupuestos[index].nombreModelo),
+                                softWrap: true,
+                                overflow: TextOverflow.fade,
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                      collapsed: Text(
-                        getDescriptionModel(_presupuestos[index].nombreModelo),
-                        softWrap: true,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      expanded: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 10),
-                            child: Text(
-                              getDescriptionModel(
-                                  _presupuestos[index].nombreModelo),
-                              softWrap: true,
-                              overflow: TextOverflow.fade,
+                        builder: (_, collapsed, expanded) {
+                          return Padding(
+                            padding: EdgeInsets.only(
+                                left: 10, right: 10, bottom: 10),
+                            child: Expandable(
+                              collapsed: collapsed,
+                              expanded: expanded,
+                              theme:
+                                  const ExpandableThemeData(crossFadePoint: 0),
                             ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
-                      builder: (_, collapsed, expanded) {
-                        return Padding(
-                          padding:
-                              EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                          child: Expandable(
-                            collapsed: collapsed,
-                            expanded: expanded,
-                            theme: const ExpandableThemeData(crossFadePoint: 0),
-                          ),
-                        );
-                      },
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ));
-        },
+            ));
+          },
+        ),
       ),
     );
   }

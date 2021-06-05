@@ -13,6 +13,8 @@ class _EditarPerfil extends State<EditarPerfil> {
   File imageFile;
   FirebaseAuth auth = FirebaseAuth.instance;
   String dsName, passwd, passwdV;
+  bool _isHidden = true;
+  bool _isHiddenPassConfirm = true;
 
   double returnResponsiveWidth(context, double originalPercentValue) {
     return MediaQuery.of(context).size.width * originalPercentValue;
@@ -44,18 +46,29 @@ class _EditarPerfil extends State<EditarPerfil> {
     Navigator.pop(context);
   }
 
+  void _togglePasswordView() {
+    setState(() {
+      _isHidden = !_isHidden;
+    });
+  }
+
+  void _togglePasswordConfirmView() {
+    setState(() {
+      _isHiddenPassConfirm = !_isHiddenPassConfirm;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: colorSubtitulos2,
       appBar: AppBar(
         iconTheme: IconThemeData(
           color: Colors.black,
         ),
         backgroundColor: Colors.white,
         title: Text(
-          auth.currentUser.displayName,
+          'Editar Perfil',
           style: TextStyle(
             color: Colors.black,
             fontSize: 20,
@@ -65,148 +78,157 @@ class _EditarPerfil extends State<EditarPerfil> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(padding: const EdgeInsets.fromLTRB(0, 50, 0, 0)),
-              Text(
-                'Editar Perfil',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
-                    fontSize: returnResponsiveFontSize(context, 30)),
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/fondo_editarPerfil.jpg'),
+                fit: BoxFit.cover,
               ),
-              FractionallySizedBox(
-                widthFactor: 0.75,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(padding: const EdgeInsets.fromLTRB(0, 20, 0, 0)),
+                Container(
+                  width: MediaQuery.of(context).size.width / 1.2,
+                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    'Introduzca su información deseada en los campos y guarde, para ser editada',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                        fontSize: returnResponsiveFontSize(context, 20)),
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              FractionallySizedBox(
-                widthFactor: 0.75,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    TextField(
-                      decoration: new InputDecoration(
-                        fillColor: fondoTextField,
-                        filled: true,
-                        hintText: "Nombre y Apellidos",
-                        hintStyle: TextStyle(color: colorPrincipal),
-                        suffixIcon: const Icon(
-                          Icons.person,
-                          color: colorPrincipal,
-                        ),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                        border: new OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(10.0),
+                const SizedBox(
+                  height: 50,
+                ),
+                FractionallySizedBox(
+                  widthFactor: 0.75,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      TextField(
+                        decoration: new InputDecoration(
+                          fillColor: fondoTextField,
+                          filled: true,
+                          hintText: "Nombre y Apellidos",
+                          hintStyle: TextStyle(color: colorPrincipal),
+                          suffixIcon: const Icon(
+                            Icons.person,
+                            color: colorPrincipal,
+                          ),
+                          contentPadding:
+                              EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0),
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(10.0),
+                            ),
                           ),
                         ),
+                        onChanged: (value) {
+                          dsName = value;
+                        },
                       ),
-                      onChanged: (value) {
-                        dsName = value;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      'Cambiar contraseña',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
-                          fontSize: returnResponsiveFontSize(context, 15)),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextField(
-                      obscureText: true,
-                      decoration: new InputDecoration(
-                        fillColor: fondoTextField,
-                        filled: true,
-                        hintText: "Contraseña",
-                        hintStyle: TextStyle(color: colorPrincipal),
-                        suffixIcon: const Icon(
-                          Icons.remove_red_eye_rounded,
-                          color: colorPrincipal,
-                        ),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                        border: new OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(10.0),
-                          ),
-                        ),
+                      const SizedBox(
+                        height: 20,
                       ),
-                      onChanged: (value) {
-                        passwd = value;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextField(
-                      obscureText: true,
-                      decoration: new InputDecoration(
-                        fillColor: fondoTextField,
-                        filled: true,
-                        hintText: "Confirmar Contraseña",
-                        hintStyle: TextStyle(color: colorPrincipal),
-                        suffixIcon: const Icon(
-                          Icons.remove_red_eye_rounded,
-                          color: colorPrincipal,
-                        ),
-                        contentPadding:
-                            EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                        border: new OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(
-                            const Radius.circular(10.0),
-                          ),
-                        ),
-                      ),
-                      onChanged: (value) {
-                        passwdV = value;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(padding: const EdgeInsets.fromLTRB(0, 0, 0, 0)),
-                    OutlinedButton(
-                      onPressed: () => updateData(),
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.all(10.0),
-                        backgroundColor: colorSubtitulos1,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                      ),
-                      child: const Text(
-                        "Guardar",
+                      Text(
+                        'Cambiar contraseña',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                            fontSize: returnResponsiveFontSize(context, 15)),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextField(
+                        obscureText: _isHidden,
+                        decoration: new InputDecoration(
+                          fillColor: fondoTextField,
+                          filled: true,
+                          hintText: "Contraseña",
+                          hintStyle: TextStyle(color: colorPrincipal),
+                          suffixIcon: InkWell(
+                            onTap: _togglePasswordView,
+                            child: Icon(
+                              _isHidden
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          ),
+                          contentPadding:
+                              EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(10.0),
+                            ),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          passwd = value;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextField(
+                        obscureText: _isHiddenPassConfirm,
+                        decoration: new InputDecoration(
+                          fillColor: fondoTextField,
+                          filled: true,
+                          hintText: "Confirmar Contraseña",
+                          hintStyle: TextStyle(color: colorPrincipal),
+                          suffixIcon: InkWell(
+                            onTap: _togglePasswordConfirmView,
+                            child: Icon(
+                              _isHiddenPassConfirm
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          ),
+                          contentPadding:
+                              EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(10.0),
+                            ),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          passwdV = value;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(padding: const EdgeInsets.fromLTRB(0, 0, 0, 0)),
+                      OutlinedButton(
+                        onPressed: () => updateData(),
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.all(10.0),
+                          backgroundColor: colorBotones,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                        ),
+                        child: const Text(
+                          "Guardar",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
