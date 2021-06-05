@@ -143,7 +143,7 @@ class DetallesModelos extends StatelessWidget {
                         alignment: Alignment.topCenter,
                         margin: EdgeInsets.symmetric(
                             horizontal: 15,
-                            vertical: MediaQuery.of(context).size.width / 10),
+                            vertical: MediaQuery.of(context).size.width / 15),
                         width: MediaQuery.of(context).size.width / 1.1,
                         child: Text(
                           modelo.descripcion,
