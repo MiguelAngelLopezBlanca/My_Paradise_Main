@@ -42,6 +42,7 @@ class _NoUser extends State<NoUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(

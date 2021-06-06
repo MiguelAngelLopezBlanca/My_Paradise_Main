@@ -16,7 +16,7 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   FirebaseAuth auth = FirebaseAuth.instance;
-  int _menuActual = 0;
+  int _menuActual = 1;
 
   List<Widget> _paginas = [
     ListadoOfertas(),

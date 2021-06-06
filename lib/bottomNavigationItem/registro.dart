@@ -97,7 +97,6 @@ class _Registro extends State<Registro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -108,162 +107,134 @@ class _Registro extends State<Registro> {
                 fit: BoxFit.cover,
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(padding: const EdgeInsets.fromLTRB(0, 60, 0, 0)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          'Registrate',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white,
-                              fontSize: returnResponsiveFontSize(context, 30)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width / 1,
-                          child: Text(
-                            'Disfruta de todas las ventajas de tener una cuenta',
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(padding: const EdgeInsets.fromLTRB(0, 60, 0, 0)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            'Registrate',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 color: Colors.white,
                                 fontSize:
-                                    returnResponsiveFontSize(context, 20)),
+                                    returnResponsiveFontSize(context, 30)),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width / 1,
-                          height: MediaQuery.of(context).size.height / 4,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image:
-                                  AssetImage('assets/images/iconos/logo.png'),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                FractionallySizedBox(
-                  widthFactor: 0.75,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      TextField(
-                          decoration: new InputDecoration(
-                            fillColor: fondoTextField,
-                            filled: true,
-                            hintText: "Nombre",
-                            hintStyle: TextStyle(color: colorPrincipal),
-                            contentPadding:
-                                EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                            border: new OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(10.0),
+                      Column(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width / 1,
+                            child: Text(
+                              'Disfruta de todas las ventajas de tener una cuenta',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white,
+                                  fontSize:
+                                      returnResponsiveFontSize(context, 20)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width / 1,
+                            height: MediaQuery.of(context).size.height / 4,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image:
+                                    AssetImage('assets/images/iconos/logo.png'),
                               ),
                             ),
                           ),
-                          onChanged: (value) {
-                            dsName = value;
-                          }),
-                      const SizedBox(
-                        height: 20,
+                        ],
                       ),
-                      TextField(
-                          decoration: new InputDecoration(
-                            fillColor: fondoTextField,
-                            filled: true,
-                            hintText: "Email",
-                            hintStyle: TextStyle(color: colorPrincipal),
-                            contentPadding:
-                                EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                            border: new OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(10.0),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  FractionallySizedBox(
+                    widthFactor: 0.75,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        TextField(
+                            decoration: new InputDecoration(
+                              fillColor: fondoTextField,
+                              filled: true,
+                              hintText: "Nombre",
+                              hintStyle: TextStyle(color: colorPrincipal),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                              border: new OutlineInputBorder(
+                                borderRadius: const BorderRadius.all(
+                                  const Radius.circular(10.0),
+                                ),
                               ),
                             ),
-                          ),
-                          onChanged: (value) {
-                            mail = value;
-                          }),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextField(
-                        obscureText: _isHidden,
-                        decoration: new InputDecoration(
-                          fillColor: fondoTextField,
-                          filled: true,
-                          hintText: "Contraseña",
-                          hintStyle: TextStyle(color: colorPrincipal),
-                          suffixIcon: InkWell(
-                            onTap: _togglePasswordView,
-                            child: Icon(
-                              _isHidden
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                            ),
-                          ),
-                          contentPadding:
-                              EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                          border: new OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
-                              const Radius.circular(10.0),
-                            ),
-                          ),
+                            onChanged: (value) {
+                              dsName = value;
+                            }),
+                        const SizedBox(
+                          height: 20,
                         ),
-                        onChanged: (value) {
-                          passwd = value;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextField(
-                          obscureText: _isHiddenPassConfirm,
+                        TextField(
+                            decoration: new InputDecoration(
+                              fillColor: fondoTextField,
+                              filled: true,
+                              hintText: "Email",
+                              hintStyle: TextStyle(color: colorPrincipal),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                              border: new OutlineInputBorder(
+                                borderRadius: const BorderRadius.all(
+                                  const Radius.circular(10.0),
+                                ),
+                              ),
+                            ),
+                            onChanged: (value) {
+                              mail = value;
+                            }),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextField(
+                          obscureText: _isHidden,
                           decoration: new InputDecoration(
                             fillColor: fondoTextField,
                             filled: true,
-                            hintText: "Confirmar Contraseña",
+                            hintText: "Contraseña",
                             hintStyle: TextStyle(color: colorPrincipal),
                             suffixIcon: InkWell(
-                              onTap: _togglePasswordConfirmView,
+                              onTap: _togglePasswordView,
                               child: Icon(
-                                _isHiddenPassConfirm
+                                _isHidden
                                     ? Icons.visibility
                                     : Icons.visibility_off,
                               ),
@@ -277,36 +248,67 @@ class _Registro extends State<Registro> {
                             ),
                           ),
                           onChanged: (value) {
-                            passwdV = value;
-                          }),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Padding(padding: const EdgeInsets.fromLTRB(0, 0, 0, 0)),
-                      OutlinedButton(
-                        onPressed: () => {
-                          registerWithEmailAndPassword(dsName, passwd, mail)
-                        },
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.all(10.0),
-                          backgroundColor: colorBotones,
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                            passwd = value;
+                          },
                         ),
-                        child: const Text(
-                          "Registrarme",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextField(
+                            obscureText: _isHiddenPassConfirm,
+                            decoration: new InputDecoration(
+                              fillColor: fondoTextField,
+                              filled: true,
+                              hintText: "Confirmar Contraseña",
+                              hintStyle: TextStyle(color: colorPrincipal),
+                              suffixIcon: InkWell(
+                                onTap: _togglePasswordConfirmView,
+                                child: Icon(
+                                  _isHiddenPassConfirm
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                              ),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                              border: new OutlineInputBorder(
+                                borderRadius: const BorderRadius.all(
+                                  const Radius.circular(10.0),
+                                ),
+                              ),
+                            ),
+                            onChanged: (value) {
+                              passwdV = value;
+                            }),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Padding(padding: const EdgeInsets.fromLTRB(0, 0, 0, 0)),
+                        OutlinedButton(
+                          onPressed: () => {
+                            registerWithEmailAndPassword(dsName, passwd, mail)
+                          },
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.all(10.0),
+                            backgroundColor: colorBotones,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                          ),
+                          child: const Text(
+                            "Registrarme",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

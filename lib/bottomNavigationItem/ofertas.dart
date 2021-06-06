@@ -100,7 +100,7 @@ class _ListadoOfertas extends State<ListadoOfertas> {
                           Container(
                             transform: Matrix4.translationValues(-20, 0, 0),
                             margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
-                            width: MediaQuery.of(context).size.width / 1.5,
+                            width: MediaQuery.of(context).size.width / 1.7,
                             height: MediaQuery.of(context).size.height / 8,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),

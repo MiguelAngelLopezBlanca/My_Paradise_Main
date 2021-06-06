@@ -107,7 +107,7 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
         ),
         backgroundColor: Colors.white,
         title: Text(
-          'Listado Presupuestos',
+          'Presupuestos Solicitados',
           style: TextStyle(
             color: Colors.black,
             fontSize: 20,
