@@ -173,7 +173,13 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
                                     onTap: () async {
                                       await deletePresupuesto(
                                           _presupuestos[index].nombreModelo);
-                                      setState(() {});
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text("Solicitud '" +
+                                            _presupuestos[index].nombreModelo +
+                                            "' eliminada"),
+                                      ));
+                                      Navigator.pop(context);
                                     },
                                   ),
                                 ],
