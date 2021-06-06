@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_cube/flutter_cube.dart';
-import 'package:my_paradise/bottomNavigationItem/ofertas.dart';
+import 'package:my_paradise/pojo/oferta.dart';
 import 'package:my_paradise/ui_constants.dart';
 
 class DetallesOfertas extends StatelessWidget {
@@ -44,7 +44,7 @@ class DetallesOfertas extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image(
-              image: AssetImage('assets/images/fondo_modelo.png'),
+              image: AssetImage('assets/images/fondos/fondo_modelo.png'),
               fit: BoxFit.cover,
             ),
           ),

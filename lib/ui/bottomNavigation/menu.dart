@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_paradise/bottomNavigationItem/mas.dart';
-import 'package:my_paradise/bottomNavigationItem/ofertas.dart';
-import 'package:my_paradise/bottomNavigationItem/perfil.dart';
+import 'package:my_paradise/ui/bottomNavigationItem/mas.dart';
+import 'package:my_paradise/ui/bottomNavigationItem/ofertas.dart';
+import 'package:my_paradise/ui/bottomNavigationItem/perfil.dart';
 
+import '../../ui_constants.dart';
 import '../home_page.dart';
 import '../no_user.dart';
-import '../ui_constants.dart';
 
 class Menu extends StatefulWidget {
   @override

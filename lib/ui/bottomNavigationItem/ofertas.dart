@@ -3,9 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_paradise/pojo/oferta.dart';
 
+import '../../ui_constants.dart';
 import '../detallesOfertas.dart';
-import '../ui_constants.dart';
 
 class ListadoOfertas extends StatefulWidget {
   @override
@@ -67,7 +68,7 @@ class _ListadoOfertas extends State<ListadoOfertas> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/ofertasbck.jpg'),
+            image: AssetImage('assets/images/fondos/ofertasbck.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -91,8 +92,9 @@ class _ListadoOfertas extends State<ListadoOfertas> {
                               borderRadius: BorderRadius.circular(50),
                               color: primaryColor.withOpacity(0.8),
                               image: DecorationImage(
-                                image: AssetImage('assets/images/modelos/' +
-                                    _ofertas[index].nombreImagen),
+                                image: AssetImage(
+                                    'assets/images/fotosModelos/' +
+                                        _ofertas[index].nombreImagen),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -199,32 +201,5 @@ class _ListadoOfertas extends State<ListadoOfertas> {
         ),
       ),
     );
-  }
-}
-
-class Oferta {
-  String nombre;
-  String descripcion;
-  String nombreArchivo;
-  String nomConstructora;
-  String nombreImagen;
-  String precio;
-  String telefono;
-
-  Oferta(
-      String nombre,
-      String descripcion,
-      String nombreArchivo,
-      String nomConstructora,
-      String precio,
-      String nombreImagen,
-      String telefono) {
-    this.nombre = nombre;
-    this.descripcion = descripcion;
-    this.nombreArchivo = nombreArchivo;
-    this.nomConstructora = nomConstructora;
-    this.precio = precio;
-    this.nombreImagen = nombreImagen;
-    this.telefono = telefono;
   }
 }

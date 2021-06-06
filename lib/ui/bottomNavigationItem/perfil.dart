@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_paradise/editar_perfil.dart';
-import 'package:my_paradise/home_page.dart';
-import 'package:my_paradise/listado_presupuestos.dart';
 import 'package:my_paradise/ui_constants.dart';
+
+import '../editar_perfil.dart';
+import '../home_page.dart';
+import '../listado_presupuestos.dart';
 
 class Perfil extends StatefulWidget {
   @override
@@ -67,7 +68,7 @@ class _PerfilState extends State<Perfil> {
         children: [
           Positioned.fill(
             child: Image(
-              image: AssetImage('assets/images/fondo_perfil.jpg'),
+              image: AssetImage('assets/images/fondos/fondo_perfil.jpg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -140,7 +141,8 @@ class _PerfilState extends State<Perfil> {
                                 ),
                                 color: Colors.white,
                                 image: DecorationImage(
-                                  image: AssetImage("assets/contacto.png"),
+                                  image: AssetImage(
+                                      "assets/images/iconos/contacto.png"),
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -169,7 +171,7 @@ class _PerfilState extends State<Perfil> {
                             color: Colors.white,
                             image: DecorationImage(
                               image: AssetImage(
-                                'assets/images/lista_proyectos.jpg',
+                                'assets/images/fondos/lista_proyectos.jpg',
                               ),
                               fit: BoxFit.cover,
                             ),
@@ -194,7 +196,7 @@ class _PerfilState extends State<Perfil> {
                             color: Colors.white,
                             image: DecorationImage(
                               image: AssetImage(
-                                'assets/images/editar_perfil.png',
+                                'assets/images/fondos/editar_perfil.png',
                               ),
                               fit: BoxFit.cover,
                             ),

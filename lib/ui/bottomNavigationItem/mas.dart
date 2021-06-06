@@ -2,9 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_paradise/detallesModelos.dart';
+import 'package:my_paradise/pojo/modelo.dart';
 
-import '../ui_constants.dart';
+import '../../ui_constants.dart';
+import '../detallesModelos.dart';
 
 class Mas extends StatefulWidget {
   @override
@@ -61,8 +62,8 @@ class _Mas extends State<Mas> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 image: DecorationImage(
-                  image: AssetImage(
-                      "assets/images/modelos/" + _modelos[index].nombreImagen),
+                  image: AssetImage("assets/images/fotosModelos/" +
+                      _modelos[index].nombreImagen),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -98,20 +99,5 @@ class _Mas extends State<Mas> {
         },
       ),
     );
-  }
-}
-
-class Modelo {
-  String nombre;
-  String descripcion;
-  String nombreArchivo;
-  String nombreImagen;
-
-  Modelo(String name, String descripcion, String nombreArchivo,
-      String nombreImagen) {
-    this.nombre = name;
-    this.descripcion = descripcion;
-    this.nombreArchivo = nombreArchivo;
-    this.nombreImagen = nombreImagen;
   }
 }

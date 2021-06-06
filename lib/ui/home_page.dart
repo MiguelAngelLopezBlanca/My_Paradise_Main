@@ -2,11 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_paradise/bottomNavigationItem/registro.dart';
 import 'package:my_paradise/ui_constants.dart';
 
 import 'bottomNavigation/menu.dart';
 import 'package:animate_do/animate_do.dart';
+
+import 'bottomNavigationItem/registro.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -90,7 +91,7 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/fondo_oscuro.jpg"),
+              image: AssetImage("assets/images/fondos/fondo_oscuro.jpg"),
               fit: BoxFit.cover,
             ),
           ),

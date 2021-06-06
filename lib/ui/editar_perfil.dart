@@ -81,7 +81,8 @@ class _EditarPerfil extends State<EditarPerfil> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/fondo_editarPerfil.jpg'),
+                image:
+                    AssetImage('assets/images/fondos/fondo_editarPerfil.jpg'),
                 fit: BoxFit.cover,
               ),
             ),

@@ -3,11 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
-import 'package:my_paradise/no_user.dart';
+import 'package:my_paradise/pojo/modelo.dart';
+import 'package:my_paradise/pojo/presupuesto.dart';
 import 'package:my_paradise/ui_constants.dart';
 
 import 'bottomNavigationItem/mas.dart';
 import 'listado_presupuestos.dart';
+import 'no_user.dart';
 
 class DetallesModelos extends StatelessWidget {
   final Modelo modelo;
@@ -112,7 +114,7 @@ class DetallesModelos extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image(
-              image: AssetImage('assets/images/fondo_modelo.png'),
+              image: AssetImage('assets/images/fondos/fondo_modelo.png'),
               fit: BoxFit.cover,
             ),
           ),

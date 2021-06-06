@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_paradise/bottomNavigationItem/registro.dart';
 import 'package:my_paradise/ui_constants.dart';
 
+import 'bottomNavigationItem/registro.dart';
 import 'home_page.dart';
 
 class NoUser extends StatefulWidget {
@@ -46,7 +46,7 @@ class _NoUser extends State<NoUser> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/fondo_noUser.jpg'),
+              image: AssetImage('assets/images/fondos/fondo_noUser.jpg'),
               fit: BoxFit.cover),
         ),
         child: Column(

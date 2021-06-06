@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_paradise/home_page.dart';
 
-import '../ui_constants.dart';
+import '../../ui_constants.dart';
+import '../home_page.dart';
 
 class Registro extends StatefulWidget {
   @override
@@ -103,7 +103,7 @@ class _Registro extends State<Registro> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/fondo_registro.jpg'),
+                image: AssetImage('assets/images/fondos/fondo_registro.jpg'),
                 fit: BoxFit.cover,
               ),
             ),

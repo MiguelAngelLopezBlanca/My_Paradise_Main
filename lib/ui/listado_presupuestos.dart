@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:expandable/expandable.dart';
-
-import 'bottomNavigationItem/mas.dart';
+import 'package:my_paradise/pojo/modelo.dart';
+import 'package:my_paradise/pojo/presupuesto.dart';
 
 class ListadoPresupuestos extends StatefulWidget {
   _ListadoPresupuestos createState() => _ListadoPresupuestos();
@@ -117,7 +117,7 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/fondo_presupuestos.jpg'),
+            image: AssetImage('assets/images/fondos/fondo_presupuestos.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -139,7 +139,7 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
                           shape: BoxShape.rectangle,
                           image: DecorationImage(
                               image: AssetImage(
-                                'assets/images/modelos/' +
+                                'assets/images/fotosModelos/' +
                                     getImageModel(
                                         _presupuestos[index].nombreModelo),
                               ),
@@ -230,15 +230,5 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
         ),
       ),
     );
-  }
-}
-
-class Presupuesto {
-  String nombreModelo;
-  String emailUsuario;
-
-  Presupuesto(String nombreModelo, String emailUsuario) {
-    this.nombreModelo = nombreModelo;
-    this.emailUsuario = emailUsuario;
   }
 }
