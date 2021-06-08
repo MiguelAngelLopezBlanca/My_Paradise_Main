@@ -20,7 +20,6 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
     super.initState();
     getPresupuestos();
     getModels();
-    print(_presupuestos.toString());
   }
 
   void getPresupuestos() async {
@@ -62,6 +61,7 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
     );
   }
 
+// Obtiene el nombre del archivo de imagen en la base de datos
   String getImageModel(String nombreModelo) {
     for (var item in _modelos) {
       if (item.nombre == nombreModelo) {
@@ -78,6 +78,7 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
     }
   }
 
+//Consulta todos los datos de modelos de la colección modelos
   void getModels() async {
     await FirebaseFirestore.instance.collection('modelos').get().then(
       (QuerySnapshot querySnapshot) {
@@ -92,7 +93,6 @@ class _ListadoPresupuestos extends State<ListadoPresupuestos> {
             _modelos.add(modelo);
           },
         );
-        print(_modelos.length);
       },
     );
     setState(() {});

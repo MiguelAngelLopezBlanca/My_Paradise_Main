@@ -21,20 +21,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    getUsers();
-  }
-
-  void getUsers() async {
-    CollectionReference collectionReference =
-        FirebaseFirestore.instance.collection("usuarios");
-
-    QuerySnapshot users = await collectionReference.get();
-
-    if (users.docs.length != 0) {
-      for (var doc in users.docs) {
-        print(doc.data());
-      }
-    }
   }
 
   final userTextController = TextEditingController();

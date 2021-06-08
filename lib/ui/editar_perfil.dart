@@ -29,6 +29,7 @@ class _EditarPerfil extends State<EditarPerfil> {
         masterScreenWidth;
   }
 
+  //Actualiza datos de la BBDD si están rellenos
   void updateData() async {
     if (dsName != null && dsName.isNotEmpty) {
       await auth.currentUser.updateProfile(displayName: dsName);

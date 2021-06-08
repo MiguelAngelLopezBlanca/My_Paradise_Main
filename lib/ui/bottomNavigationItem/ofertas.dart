@@ -56,7 +56,6 @@ class _ListadoOfertas extends State<ListadoOfertas> {
             _ofertas.add(oferta);
           },
         );
-        print(_ofertas.length);
       },
     );
     setState(() {});

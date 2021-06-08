@@ -47,7 +47,6 @@ class DetallesModelos extends StatelessWidget {
             }
           },
         );
-        print(_presupuestos.length);
       },
     );
   }
