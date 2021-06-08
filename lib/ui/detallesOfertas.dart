@@ -3,12 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_cube/flutter_cube.dart';
+import 'package:my_paradise/calls_and_messages_service.dart';
+import 'package:my_paradise/main.dart';
 import 'package:my_paradise/pojo/oferta.dart';
 import 'package:my_paradise/ui_constants.dart';
 
 class DetallesOfertas extends StatelessWidget {
   final Oferta ofertas;
-
+  final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
   DetallesOfertas(this.ofertas);
 
   double returnResponsiveWidth(context, double originalPercentValue) {
@@ -158,14 +160,17 @@ class DetallesOfertas extends StatelessWidget {
                               const SizedBox(
                                 height: 20,
                               ),
-                              Text(
-                                ofertas.telefono,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize:
-                                      returnResponsiveFontSize(context, 18),
-                                  fontWeight: FontWeight.w800,
+                              InkWell(
+                                child: Text(
+                                  ofertas.telefono,
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize:
+                                        returnResponsiveFontSize(context, 18),
+                                    fontWeight: FontWeight.w800,
+                                  ),
                                 ),
+                                onTap: () => _service.call(ofertas.telefono),
                               ),
                             ],
                           ),
